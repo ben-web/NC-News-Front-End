@@ -15,7 +15,7 @@ class App extends Component {
     },
     topics: [
       { title: 'Coding is Fun', slug: 'coding' },
-      { title: 'Football and Ball Games', slug: 'football' },
+      { title: 'Football and Games', slug: 'football' },
       { title: 'Cooking with Gas', slug: 'cooking' },
     ]
   };
