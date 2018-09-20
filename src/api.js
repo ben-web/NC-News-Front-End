@@ -8,3 +8,6 @@ export const fetchArticles = () => axios.get(`${DB_URL}/articles`)
 export const fetchArticlesByTopic = topicSlug => axios.get(`${DB_URL}/topics/${topicSlug}/articles`)
   .then(({ data: { articles } }) => articles);
 
+export const fetchTopics = () => axios.get(`${DB_URL}/topics`)
+  .then(({ data: { topics } }) => topics);
+

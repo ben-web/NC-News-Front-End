@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { Container, Col, Row } from 'reactstrap';
+import * as api from './api';
 import Articles from './components/Articles';
 import Navigation from './components/Navigation';
 
@@ -13,11 +14,7 @@ class App extends Component {
       name: "Jess Jelly",
       avatar_url: "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg"
     },
-    topics: [
-      { title: 'Coding is Fun', slug: 'coding' },
-      { title: 'Football and Games', slug: 'football' },
-      { title: 'Cooking with Gas', slug: 'cooking' },
-    ]
+    topics: []
   };
 
   render() {
@@ -38,16 +35,19 @@ class App extends Component {
         <main>
           <Row>
             <Col lg="9">
-              <Switch>
-                <Route exact path="/" component={Articles} />
-                <Route path="/topics/:topic"
-                  render={({ match }) =>
-                    <Articles match={match}
-                      currentTopic={this.state.currentTopic}
-                      topics={this.state.topics} />}
-                />
-                <Route component={this.NoMatch} />
-              </Switch>
+     {
+       this.state.topics.length > 0 &&
+                <Switch>
+                  <Route exact path="/" component={Articles} />
+                  <Route path="/topics/:topic"
+                    render={({ match }) =>
+                      <Articles match={match}
+                        currentTopic={this.state.currentTopic}
+                        topics={this.state.topics} />}
+                  />
+                  <Route component={this.NoMatch} />
+                </Switch>
+     }
             </Col>
             <Col>
               <aside>
@@ -67,6 +67,15 @@ class App extends Component {
         </Row>
       </Container>
     );
+  }
+
+  componentDidMount() {
+    this.getTopics();
+  }
+
+  getTopics = () => {
+    api.fetchTopics()
+      .then(topics => this.setState({ topics }));
   }
 
   NoMatch = ({ location }) => (

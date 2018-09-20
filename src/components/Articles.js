@@ -36,7 +36,7 @@ class Articles extends Component {
     return (
       <div>
         <h1 className="display-4">{pageHeading}</h1>
-        <p>{articleCount} articles in this topic</p>
+        <p>{articleCount} articles</p>
         <CardColumns>
           {
             this.state.articles.map(article => {
@@ -72,17 +72,13 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps
-      && this.props.match.params.topic !== this.propsthis.props.match.params.topic) {
+    if (this.props  && this.props.match.params.topic !== this.props.match.params.topic) {
       this.getArticles();
     }
   }
 
   getArticles = () => {
-
     const { topic } = this.props.match.params;
-    console.log(topic)
-
     if (topic) {
       api.fetchArticlesByTopic(topic)
         .then(articles => this.setState({ articles }));
@@ -90,8 +86,6 @@ class Articles extends Component {
       api.fetchArticles()
         .then(articles => this.setState({ articles }));
     }
-
-
   }
 
 }
