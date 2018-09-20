@@ -22,21 +22,16 @@ class App extends Component {
       <Container>
         <Row>
           <Col>
-            <header className="py-3" id="top">
-              <a href="/" className="logo text-dark">NC News</a>
+            <header>
+              <Navigation topics={this.state.topics} />
             </header>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Navigation topics={this.state.topics} />
           </Col>
         </Row>
         <main>
           <Row>
             <Col lg="9">
-     {
-       this.state.topics.length > 0 &&
+              {
+                this.state.topics.length > 0 &&
                 <Switch>
                   <Route exact path="/" component={Articles} />
                   <Route path="/topics/:topic"
@@ -47,7 +42,7 @@ class App extends Component {
                   />
                   <Route component={this.NoMatch} />
                 </Switch>
-     }
+              }
             </Col>
             <Col>
               <aside>
@@ -74,8 +69,10 @@ class App extends Component {
   }
 
   getTopics = () => {
-    api.fetchTopics()
-      .then(topics => this.setState({ topics }));
+    if (this.state.topics.length === 0) {
+      api.fetchTopics()
+        .then(topics => this.setState({ topics }));
+    }
   }
 
   NoMatch = ({ location }) => (
