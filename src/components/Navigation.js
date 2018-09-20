@@ -25,7 +25,7 @@ class Navigation extends Component {
     return (
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">
-          <img src={logo} className="d-inline-block align-top" width="30" height="30" alt="NC News" />
+          <img src={logo} className="d-inline-block align-top mr-2" width="30" height="30" alt="NC News" />
           NC News
         </NavbarBrand>
         <NavbarToggler onClick={this.toggleNav} />
