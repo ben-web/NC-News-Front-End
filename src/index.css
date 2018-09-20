@@ -54,8 +54,9 @@ h1, h2, h3, h4, h5, h6 {
     column-count: 3
   }
 }
-
-
+.card-title{
+  text-transform: capitalize;
+}
 
 footer {
   padding: 2.5rem 0;
@@ -67,7 +68,6 @@ footer {
 footer p:last-child {
   margin-bottom: 0;
 }
-
 
 
 /* From Bootstrap Blog Template */

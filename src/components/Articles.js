@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from 'reactstrap';
 import * as api from '../api';
+import * as utils from '../utils';
 
 class Articles extends Component {
 
@@ -30,27 +31,29 @@ class Articles extends Component {
     }
     document.title += ` ${pageHeading}`;
 
+    const articleCount = this.state.articles.length;
+
     return (
       <div>
         <h1 className="display-4">{pageHeading}</h1>
+        <p>{articleCount} articles in this topic</p>
         <CardColumns>
           {
             this.state.articles.map(article => {
-              const randomNumber = Math.floor(Math.random() * 85);
-              const randomImageUrl = `https://picsum.photos/g/318/180?image=${randomNumber}`
               return (
                 <Card key={article._id} className="text-center">
-                  <CardImg top width="100%" src={randomImageUrl} alt="Card image cap" />
+                  <CardImg top width="100%" src={utils.randomImageUrl(500, 300)} alt="Card image cap" />
                   <CardBody>
                     <CardTitle>{article.title}</CardTitle>
-                    <CardSubtitle>{article.created_by.name}</CardSubtitle>
+                    <CardSubtitle className="my-3 text-muted">{article.created_by.name}</CardSubtitle>
                     <CardText>
                       {article.body.split(' ').splice(0, 34).join(' ')}&hellip;
                     </CardText>
                     <CardLink href="#">Read More</CardLink>
-                    
                   </CardBody>
                   <CardFooter>
+                    {article.belongs_to}
+                    <br />
                     Votes: {article.votes} | Comments: {article.comments}
                   </CardFooter>
                 </Card>
@@ -65,8 +68,30 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    api.fetchArticles()
-      .then(articles => this.setState({ articles }));
+    this.getArticles();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps
+      && this.props.match.params.topic !== this.propsthis.props.match.params.topic) {
+      this.getArticles();
+    }
+  }
+
+  getArticles = () => {
+
+    const { topic } = this.props.match.params;
+    console.log(topic)
+
+    if (topic) {
+      api.fetchArticlesByTopic(topic)
+        .then(articles => this.setState({ articles }));
+    } else {
+      api.fetchArticles()
+        .then(articles => this.setState({ articles }));
+    }
+
+
   }
 
 }

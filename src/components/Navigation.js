@@ -17,7 +17,7 @@ import logo from '../logo.svg';
 class Navigation extends Component {
 
   state = {
-    isOpen: false
+    navIsOpen: false
   };
 
   render() {
@@ -28,8 +28,8 @@ class Navigation extends Component {
           <img src={logo} className="d-inline-block align-top" width="30" height="30" alt="NC News" />
           NC News
         </NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.isOpen} navbar>
+        <NavbarToggler onClick={this.toggleNav} />
+        <Collapse isOpen={this.state.navIsOpen} navbar>
           <Nav className="ml-auto" navbar>
             {
               topics.map(topic => {
@@ -72,9 +72,9 @@ class Navigation extends Component {
     );
   }
 
-  toggle = () => {
+  toggleNav = () => {
     this.setState({
-      isOpen: !this.state.isOpen
+      navIsOpen: !this.state.navIsOpen
     });
   }
 }

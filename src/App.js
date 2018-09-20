@@ -40,7 +40,12 @@ class App extends Component {
             <Col lg="9">
               <Switch>
                 <Route exact path="/" component={Articles} />
-                <Route path="/topics/:topic" render={({ match }) => <Articles match={match} topics={this.state.topics} />} />
+                <Route path="/topics/:topic"
+                  render={({ match }) =>
+                    <Articles match={match}
+                      currentTopic={this.state.currentTopic}
+                      topics={this.state.topics} />}
+                />
                 <Route component={this.NoMatch} />
               </Switch>
             </Col>
@@ -71,6 +76,7 @@ class App extends Component {
       <p>No match for <code>{location.pathname}</code></p>
     </div>
   );
+
 
 }
 
