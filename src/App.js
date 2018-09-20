@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Col, Row } from 'reactstrap';
 import Articles from './components/Articles';
 import Navigation from './components/Navigation';
 
@@ -37,7 +37,7 @@ class App extends Component {
         </Row>
         <main>
           <Row>
-            <Col sm="9">
+            <Col lg="9">
               <Switch>
                 <Route exact path="/" component={Articles} />
                 <Route path="/topics/:topic" render={({ match }) => <Articles match={match} topics={this.state.topics} />} />

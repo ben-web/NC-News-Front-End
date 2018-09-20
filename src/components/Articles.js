@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, CardBody, CardHeader, CardColumns, CardText, CardTitle, CardFooter } from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardColumns,
+  CardFooter,
+  CardHeader,
+  CardImg,
+  CardLink,
+  CardSubtitle,
+  CardText,
+  CardTitle,
+} from 'reactstrap';
 import * as api from '../api';
 
 class Articles extends Component {
@@ -9,6 +21,7 @@ class Articles extends Component {
   }
 
   render() {
+
     let pageHeading = 'All Articles';
     if (this.props.match.params.topic) {
       const { topics } = this.props;
@@ -19,39 +32,34 @@ class Articles extends Component {
 
     return (
       <div>
-        <h1>{pageHeading}</h1>
-        <p>Displays all articles or articles by topic</p>
+        <h1 className="display-4">{pageHeading}</h1>
         <CardColumns>
           {
             this.state.articles.map(article => {
+              const randomNumber = Math.floor(Math.random() * 85);
+              const randomImageUrl = `https://picsum.photos/g/318/180?image=${randomNumber}`
               return (
-                
-                <Card key={article._id}>
-                  <CardHeader>Header</CardHeader>
+                <Card key={article._id} className="text-center">
+                  <CardImg top width="100%" src={randomImageUrl} alt="Card image cap" />
                   <CardBody>
                     <CardTitle>{article.title}</CardTitle>
-                    <CardText>{article.body.substring(0, 300)}...</CardText>
+                    <CardSubtitle>{article.created_by.name}</CardSubtitle>
+                    <CardText>
+                      {article.body.split(' ').splice(0, 34).join(' ')}&hellip;
+                    </CardText>
+                    <CardLink href="#">Read More</CardLink>
+                    
                   </CardBody>
-                  <CardFooter>Footer</CardFooter>
+                  <CardFooter>
+                    Votes: {article.votes} | Comments: {article.comments}
+                  </CardFooter>
                 </Card>
-                
               )
             })
           }
-
-
-
         </CardColumns>
 
 
-        <Row>
-          <Col sm="6">
-            Article
-          </Col>
-          <Col sm="6">
-            Article
-          </Col>
-        </Row>
       </div>
     );
   }

@@ -41,14 +41,14 @@ class Navigation extends Component {
               })
             }
             <NavItem>
-              <NavLink href="/somewhere/">Internal Link</NavLink>
+              <NavLink href="/somewhere/">Internal</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">External Link</NavLink>
+              <NavLink href="https://github.com/reactstrap/reactstrap">External</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Articles
+                Topics
                 </DropdownToggle>
               <DropdownMenu right>
                 {

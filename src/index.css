@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
-/* .display-4 {
+.display-4 {
   font-size: 2.5rem;
 }
 @media (min-width: 768px) {
@@ -36,7 +36,26 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 3rem;
   }
 }
- */
+
+
+ /* Articles */
+@media (min-width: 576px) {
+   .card-columns {
+    column-count: 1
+  }
+}
+@media (min-width: 768px) {
+   .card-columns {
+    column-count: 2
+  }
+}
+@media (min-width: 992px) {
+   .card-columns {
+    column-count: 3
+  }
+}
+
+
 
 footer {
   padding: 2.5rem 0;
