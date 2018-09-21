@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat'
 import * as api from '../api';
 import * as utils from '../utils';
-
-dayjs.extend(advancedFormat);
+import Comments from './Comments';
 
 class Article extends Component {
   state = {
@@ -13,20 +10,19 @@ class Article extends Component {
 
   render() {
     const { article } = this.state;
-    if (article) {
-      const displayDate = dayjs(article.created_at).format('Do MMM YYYY');
-      return (
-        <div>
-          <h1 className="display-4">{article.title}</h1>
-          <h2 className="display-5 text-muted">
-            {article.created_by.name}
-            <span className="d-block float-right font-italic">{displayDate}</span>
-          </h2>
-          <img className="article-image" src={utils.randomImageUrl(840, 400)} alt={article.title} width="100%" />
-          <p>{article.body}</p>
-        </div>
-      );
-    } else return (<p>loading</p>)
+    if (!article) return <p>Loading...</p>
+    return (
+      <div>
+        <h1 className="display-4">{article.title}</h1>
+        <h2 className="display-5 text-muted">
+          {article.created_by.name}
+          <span className="d-block float-right font-italic">{utils.formatDate(article.created_at)}</span>
+        </h2>
+        <img className="article-image" src={utils.randomImageUrl(840, 400)} alt={article.title} width="100%" />
+        <p>{article.body}</p>
+        <Comments articleId={article._id} />
+      </div>
+    );
   }
 
   componentDidMount() {
@@ -35,8 +31,8 @@ class Article extends Component {
 
   getArticle = () => {
     const { id } = this.props.match.params;
-      api.fetchArticle(id)
-        .then(article => this.setState({ article }));
+    api.fetchArticle(id)
+      .then(article => this.setState({ article }));
     console.log('fetchArticle called');
   }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Button,
   Card,
   CardBody,
   CardColumns,
@@ -12,12 +11,8 @@ import {
   CardText,
   CardTitle,
 } from 'reactstrap';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat'
 import * as api from '../api';
 import * as utils from '../utils';
-
-dayjs.extend(advancedFormat);
 
 class Articles extends Component {
 
@@ -44,16 +39,15 @@ class Articles extends Component {
         <CardColumns>
           {
             this.state.articles.map(article => {
-              const displayDate = dayjs(article.created_at).format('Do MMM');
               return (
                 <Card key={article._id} className="text-center">
-                  <CardImg top width="100%" src={utils.randomImageUrl(500, 300)} alt="Card image cap" />
-                  <CardHeader>{article.belongs_to}</CardHeader>
+                  <CardImg top width="100%" src={utils.randomImageUrl(500, 300)} alt="Article Leader" />
+                  <CardHeader>{utils.formatDate(article.created_at)}</CardHeader>
                   <CardBody>
                     <CardTitle>{article.title}</CardTitle>
                     <CardSubtitle className="my-3 text-muted">
                       {article.created_by.name}
-                      <span className="d-block mt-2 font-italic">{displayDate}</span>
+                      <span className="d-block mt-2 font-italic">{utils.formatDate(article.created_at)}</span>
                     </CardSubtitle>
                     <CardText>
                       {article.body.split(' ').splice(0, 34).join(' ')}&hellip;
@@ -62,6 +56,8 @@ class Articles extends Component {
                   </CardBody>
                   <CardFooter>
                     Votes: {article.votes} | Comments: {article.comments}
+                    <br/>
+                    {article.belongs_to}
                   </CardFooter>
                 </Card>
               )
