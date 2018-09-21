@@ -1,15 +1,14 @@
 import React from 'react';
 import { Media } from 'reactstrap';
 import * as utils from '../utils';
+import Avatar from './Avatar';
 
 const Comment = ({ comment }) => {
-  console.log(comment)
+  console.log(comment.created_by.avatar_url)
   return (
     <Media tag="li">
       <Media left top href={`/user/${comment.created_by.username}`}>
-        <img src="${comment.created_by.avatar_url}"
-          alt={`${comment.created_by.name}'s avatar`}
-        />
+        <Avatar avatarUrl={comment.created_by.avatar_url} userName={comment.created_by.name} />
       </Media>
       <Media body>
         <Media heading>
