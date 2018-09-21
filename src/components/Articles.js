@@ -17,28 +17,28 @@ import * as utils from '../utils';
 class Articles extends Component {
 
   state = {
-    articles: []
+    articles: null
   }
 
   render() {
-
     let pageHeading = 'All Articles';
     if (this.props.match.params.topic) {
       const { topics } = this.props;
       const topicTitle = topics.find((topic) => topic.slug === this.props.match.params.topic).title;
       pageHeading = `${topicTitle}`;
     }
-    document.title += ` ${pageHeading}`;
+    document.title = pageHeading;
 
-    const articleCount = this.state.articles.length;
+    const { articles } = this.state;
 
+    if (!articles) return <p>Loading articles...</p>
     return (
       <div>
         <h1 className="display-4">{pageHeading}</h1>
-        <p>{articleCount} articles</p>
+        <p>{articles.length} articles</p>
         <CardColumns>
           {
-            this.state.articles.map(article => {
+            articles.map(article => {
               return (
                 <Card key={article._id} className="text-center">
                   <CardImg top width="100%" src={utils.randomImageUrl(500, 300)} alt="Article Leader" />
@@ -56,7 +56,7 @@ class Articles extends Component {
                   </CardBody>
                   <CardFooter>
                     Votes: {article.votes} | Comments: {article.comments}
-                    <br/>
+                    <br />
                     {article.belongs_to}
                   </CardFooter>
                 </Card>
@@ -72,23 +72,14 @@ class Articles extends Component {
     this.getArticles();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.topic !== this.props.match.params.topic) {
-      this.getArticles();
-    }
-  }
-
-  getArticles = () => {
+  async getArticles() {
     const { topic } = this.props.match.params;
-    if (topic) {
-      api.fetchArticlesByTopic(topic)
-        .then(articles => this.setState({ articles }));
-      console.log('fetchArticlesByTopic called');
-    } else {
-      api.fetchArticles()
-        .then(articles => this.setState({ articles }));
-      console.log('fetchArticles called');
-    }
+    const articles = (!topic)
+      ? await api.fetchArticles()
+      : await api.fetchArticlesByTopic(topic);
+
+    console.log('fetchArticles called');
+    this.setState({ articles });
   }
 
 }

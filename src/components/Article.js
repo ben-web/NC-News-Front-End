@@ -11,6 +11,7 @@ class Article extends Component {
   render() {
     const { article } = this.state;
     if (!article) return <p>Loading...</p>
+    document.title = article.title;
     return (
       <div>
         <h1 className="display-4">{article.title}</h1>
@@ -25,15 +26,11 @@ class Article extends Component {
     );
   }
 
-  componentDidMount() {
-    this.getArticle();
-  }
-
-  getArticle = () => {
+  async componentDidMount() {
     const { id } = this.props.match.params;
-    api.fetchArticle(id)
-      .then(article => this.setState({ article }));
+    const article = await api.fetchArticle(id);
     console.log('fetchArticle called');
+    this.setState({ article });
   }
 
 }

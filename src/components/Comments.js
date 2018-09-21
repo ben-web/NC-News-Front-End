@@ -23,7 +23,6 @@ class Comments extends Component {
   }
 
   async componentDidMount() {
-    /* this.getComments(); */
     const { articleId } = this.props;
     const comments = await api.fetchCommentsByArticleId(articleId)
     console.log('fetchComments called');
