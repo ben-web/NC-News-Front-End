@@ -48,7 +48,7 @@ class Navigation extends Component {
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Topics
+                User
                 </DropdownToggle>
               <DropdownMenu right>
                 {

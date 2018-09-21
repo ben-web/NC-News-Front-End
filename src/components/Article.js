@@ -2,16 +2,23 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import * as utils from '../utils';
 import Comments from './Comments';
+import ErrorMessage from './ErrorMessage';
 
 class Article extends Component {
   state = {
-    article: null
+    article: null,
+    error: null
   }
 
   render() {
-    const { article } = this.state;
+
+    const { article, error } = this.state;
+    
+    if (error) return <ErrorMessage error={error} />
     if (!article) return <p>Loading...</p>
+    
     document.title = article.title;
+    
     return (
       <div>
         <h1 className="display-4">{article.title}</h1>
@@ -26,10 +33,16 @@ class Article extends Component {
     );
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getArticle();
+  }
+
+  async getArticle() {
     const { id } = this.props.match.params;
-    const article = await api.fetchArticle(id);
+    const { article, error } = await api.fetchArticle(id);
     console.log('fetchArticle called');
+
+    if (error) return this.setState({ error });
     this.setState({ article });
   }
 

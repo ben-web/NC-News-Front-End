@@ -13,25 +13,31 @@ import {
 } from 'reactstrap';
 import * as api from '../api';
 import * as utils from '../utils';
+import ErrorMessage from './ErrorMessage';
 
 class Articles extends Component {
 
   state = {
-    articles: null
+    articles: null,
+    error: null
   }
 
   render() {
+
     let pageHeading = 'All Articles';
     if (this.props.match.params.topic) {
       const { topics } = this.props;
-      const topicTitle = topics.find((topic) => topic.slug === this.props.match.params.topic).title;
+      const topic = topics.find((topic) => topic.slug === this.props.match.params.topic);
+      const topicTitle = topic ? topic.title : 'Not Found';
       pageHeading = `${topicTitle}`;
     }
     document.title = pageHeading;
 
-    const { articles } = this.state;
+    const { articles, error } = this.state;
 
+    if (error) return <ErrorMessage error={error} />
     if (!articles) return <p>Loading articles...</p>
+    
     return (
       <div>
         <h1 className="display-4">{pageHeading}</h1>
@@ -74,11 +80,13 @@ class Articles extends Component {
 
   async getArticles() {
     const { topic } = this.props.match.params;
-    const articles = (!topic)
+    const { articles, error } = (!topic)
       ? await api.fetchArticles()
       : await api.fetchArticlesByTopic(topic);
 
     console.log('fetchArticles called');
+
+    if (error) return this.setState({ error });
     this.setState({ articles });
   }
 

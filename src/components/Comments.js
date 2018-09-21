@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import { Media } from 'reactstrap';
 import * as api from '../api';
 import Comment from './Comment';
+import ErrorMessage from './ErrorMessage';
 
 class Comments extends Component {
   state = {
-    comments: null
+    comments: null,
+    error: null
   }
 
   render() {
-    const { comments } = this.state;
-    if (!comments) return <p>Loading comments...</p>
+    const { comments, error } = this.state;
+
+    if (error) return <ErrorMessage error={error} />
+    if (!comments) return <p>No comments for this article</p>
+
     return (
       <Media list>
         {
@@ -22,10 +27,16 @@ class Comments extends Component {
     );
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getComments();
+  }
+
+  async getComments() {
     const { articleId } = this.props;
-    const comments = await api.fetchCommentsByArticleId(articleId)
+    const { comments, error } = await api.fetchCommentsByArticleId(articleId)
     console.log('fetchComments called');
+
+    if (error && error.errorCode !== 404) return this.setState({ error })
     this.setState({ comments });
   }
 }

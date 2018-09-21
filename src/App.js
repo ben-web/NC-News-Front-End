@@ -4,6 +4,7 @@ import { Container, Col, Row } from 'reactstrap';
 import * as api from './api';
 import Article from './components/Article';
 import Articles from './components/Articles';
+import ErrorMessage from './components/ErrorMessage';
 import Navigation from './components/Navigation';
 
 class App extends Component {
@@ -15,15 +16,19 @@ class App extends Component {
       name: "Jess Jelly",
       avatar_url: "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg"
     },
-    topics: []
+    error: null,
+    topics: null
   };
 
   render() {
+    const { topics, error } = this.state;
+    if (error) return <ErrorMessage error={error} />
+    if (!topics) return <p>Loading topics...</p>
     return (
       <Container>
         <Row>
           <Col>
-            <header>
+            <header id="top">
               <Navigation topics={this.state.topics} />
             </header>
           </Col>
@@ -31,23 +36,24 @@ class App extends Component {
         <main>
           <Row>
             <Col lg="9">
-              {
-                this.state.topics.length > 0 &&
-                <Switch>
-                  <Route exact path="/" component={Articles} />
-                  <Route path="/topics/:topic"
-                    render={({ match }) =>
-                      <Articles match={match}
-                        currentTopic={this.state.currentTopic}
-                        topics={this.state.topics} />}
-                  />
-                  <Route path="/article/:id"
-                    render={({ match }) =>
-                      <Article match={match} />}
-                  />
-                  <Route component={this.NoMatch} />
-                </Switch>
-              }
+              <Switch>
+                <Route exact path="/" component={Articles} />
+                <Route path="/topics/:topic"
+                  render={({ match }) =>
+                    <Articles match={match}
+                      currentTopic={this.state.currentTopic}
+                      topics={this.state.topics} />
+                  } />
+                <Route path="/article/:id"
+                  render={({ match }) =>
+                    <Article match={match} />
+                  } />
+                <Route render={() =>
+                  <ErrorMessage error={
+                    { errorCode: 404, errorMessage: 'Page Not Found' }
+                  } />
+                } />
+              </Switch>
             </Col>
             <Col>
               <aside>
@@ -73,21 +79,14 @@ class App extends Component {
     this.getTopics();
   }
 
+  async getTopics() {
+    const { topics, error } = await api.fetchTopics()
 
-  getTopics = () => {
-    api.fetchTopics()
-      .then(topics => this.setState({ topics }));
     console.log('fetchTopics called');
+
+    if (error) return this.setState({ error });
+    this.setState({ topics });
   }
-
-  NoMatch = ({ location }) => (
-    <div>
-      <h1>404
-        <small className="ml-2 text-muted">Route Not Found</small></h1>
-      <p>No match for <code>{location.pathname}</code></p>
-    </div>
-  );
-
 
 }
 
