@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const DB_URL = 'https://ben-web-nc-news.herokuapp.com/api';
 
+export const fetchArticle = articleId => axios.get(`${DB_URL}/articles/${articleId}`)
+  .then(({ data: { article } }) => article);
+
 export const fetchArticles = () => axios.get(`${DB_URL}/articles`)
   .then(({ data: { articles } }) => articles);
 

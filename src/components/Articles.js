@@ -44,7 +44,6 @@ class Articles extends Component {
         <CardColumns>
           {
             this.state.articles.map(article => {
-              const articleDate = article.created_at;
               const displayDate = dayjs(article.created_at).format('Do MMM');
               return (
                 <Card key={article._id} className="text-center">
@@ -59,7 +58,7 @@ class Articles extends Component {
                     <CardText>
                       {article.body.split(' ').splice(0, 34).join(' ')}&hellip;
                     </CardText>
-                    <CardLink href="#">Read More</CardLink>
+                    <CardLink href={`/article/${article._id}`}>Read More</CardLink>
                   </CardBody>
                   <CardFooter>
                     Votes: {article.votes} | Comments: {article.comments}
@@ -88,9 +87,11 @@ class Articles extends Component {
     if (topic) {
       api.fetchArticlesByTopic(topic)
         .then(articles => this.setState({ articles }));
+      console.log('fetchArticlesByTopic called');
     } else {
       api.fetchArticles()
         .then(articles => this.setState({ articles }));
+      console.log('fetchArticles called');
     }
   }
 

@@ -31,6 +31,9 @@ class Navigation extends Component {
         <NavbarToggler onClick={this.toggleNav} />
         <Collapse isOpen={this.state.navIsOpen} navbar>
           <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="/">Home</NavLink>
+            </NavItem>
             {
               topics.map(topic => {
                 return (
@@ -41,10 +44,7 @@ class Navigation extends Component {
               })
             }
             <NavItem>
-              <NavLink href="/somewhere/">Internal</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">External</NavLink>
+              <NavLink href="/somewhere/">Broken</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>

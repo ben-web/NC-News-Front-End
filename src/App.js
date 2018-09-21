@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { Container, Col, Row } from 'reactstrap';
 import * as api from './api';
+import Article from './components/Article';
 import Articles from './components/Articles';
 import Navigation from './components/Navigation';
 
@@ -40,6 +41,10 @@ class App extends Component {
                         currentTopic={this.state.currentTopic}
                         topics={this.state.topics} />}
                   />
+                  <Route path="/article/:id"
+                    render={({ match }) =>
+                      <Article match={match} />}
+                  />
                   <Route component={this.NoMatch} />
                 </Switch>
               }
@@ -68,11 +73,11 @@ class App extends Component {
     this.getTopics();
   }
 
+
   getTopics = () => {
-    if (this.state.topics.length === 0) {
-      api.fetchTopics()
-        .then(topics => this.setState({ topics }));
-    }
+    api.fetchTopics()
+      .then(topics => this.setState({ topics }));
+    console.log('fetchTopics called');
   }
 
   NoMatch = ({ location }) => (
