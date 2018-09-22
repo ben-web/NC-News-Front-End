@@ -2,6 +2,7 @@ import React from 'react';
 import { Media } from 'reactstrap';
 import * as utils from '../utils';
 import Avatar from './Avatar';
+import Votes from './Votes';
 
 const Comment = ({ comment }) => {
   console.log(comment.created_by.avatar_url)
@@ -16,6 +17,8 @@ const Comment = ({ comment }) => {
           <small className="float-right text-muted">{utils.formatDate(comment.created_at)}</small>
         </Media>
         {comment.body}
+        <Votes entity={comment} 
+        entityType="comment"/>
       </Media>
     </Media>
   );

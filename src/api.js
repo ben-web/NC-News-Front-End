@@ -45,7 +45,15 @@ export const fetchCommentsByArticleId =
 
 export const fetchTopics =
   addErrorHandler(
-    () => axios.get(`${DB_URL}/topics`)
+    () => axios
+      .get(`${DB_URL}/topics`)
       .then(({ data: { topics } }) => ({ topics }))
+  );
+
+export const VoteComment =
+  addErrorHandler(
+    (commentId, direction) => axios
+      .patch(`${DB_URL}/comments/${commentId}?vote=${direction}`)
+      .then(({ data: { comment } }) => ({ comment }))
   );
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Badge,
   Card,
   CardBody,
   CardColumns,
@@ -14,6 +15,7 @@ import {
 import * as api from '../api';
 import * as utils from '../utils';
 import ErrorMessage from './ErrorMessage';
+import ArticleInfo from './ArticleInfo';
 
 class Articles extends Component {
 
@@ -37,7 +39,7 @@ class Articles extends Component {
 
     if (error) return <ErrorMessage error={error} />
     if (!articles) return <p>Loading articles...</p>
-    
+
     return (
       <div>
         <h1 className="display-4">{pageHeading}</h1>
@@ -61,9 +63,13 @@ class Articles extends Component {
                     <CardLink href={`/article/${article._id}`}>Read More</CardLink>
                   </CardBody>
                   <CardFooter>
-                    Votes: {article.votes} | Comments: {article.comments}
+                    <ArticleInfo article={article} />
+{/*                     Votes: {article.votes} | Comments: {article.comments}
                     <br />
-                    {article.belongs_to}
+                    <Badge color="secondary" pill
+                      href={`/topics/${article.belongs_to}`}>
+                      {article.belongs_to}
+                    </Badge> */}
                   </CardFooter>
                 </Card>
               )
