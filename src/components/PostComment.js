@@ -7,12 +7,15 @@ import {
   FormText,
   Input,
   Label,
+  Media
 } from 'reactstrap';
 import * as api from '../api';
+import Comment from './Comment';
 
 class PostComment extends Component {
 
   state = {
+    comment: null,
     commentBody: '',
     error: null,
     submitText: 'Submit Post',
@@ -20,9 +23,8 @@ class PostComment extends Component {
   }
 
   render() {
-    const { article, currentUser } = this.props;
-    const { commentBody, error, submitting, submitText } = this.state;
-
+    const { currentUser } = this.props;
+    const { comment, commentBody, error, submitting, submitText } = this.state;
 
     if (!currentUser) return (null);
     if (error) return (
@@ -30,6 +32,13 @@ class PostComment extends Component {
         <h3 className="text-danger">{error.errorCode} Error</h3>
         <p className="text-danger">Could not save comment: {error.errorMessage}</p>
       </div>
+    )
+    if (comment) return (
+      <Media list>
+        <Comment
+          comment={comment}
+          currentUser={currentUser} />
+      </Media>
     )
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -76,6 +85,8 @@ class PostComment extends Component {
     if (error) return this.setState({ error });
 
     this.setState({
+      comment: comment,
+      commentBody: '',
       submitting: false,
       submitText: 'Submit Post'
     })

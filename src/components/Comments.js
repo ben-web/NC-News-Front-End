@@ -35,10 +35,11 @@ class Comments extends Component {
   }
 
   async getComments() {
-    const { articleId } = this.props;
-    const { comments, error } = await api.fetchCommentsByArticleId(articleId)
+    const { article: {_id} } = this.props;
+    const { comments, error } = await api.fetchCommentsByArticleId(_id)
     
     if (error && error.errorCode !== 404) return this.setState({ error })
+    
     comments.sort((a, b) => a.created_at.localeCompare(b.created_at));
     this.setState({ comments });
   }

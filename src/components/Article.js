@@ -37,10 +37,10 @@ class Article extends Component {
             currentUser={currentUser} />
         </div>
         <span className="clearfix">&nbsp;</span>
-        <PostComment article={article}
-          currentUser={currentUser} />
         <aside>
-          <Comments articleId={article._id}
+          <Comments article={article}
+            currentUser={currentUser} />
+          <PostComment article={article}
             currentUser={currentUser} />
         </aside>
       </div>
