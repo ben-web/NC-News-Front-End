@@ -16,9 +16,11 @@ const Comment = ({ comment, currentUser }) => {
           <small className="float-right text-muted">{utils.formatDate(comment.created_at)}</small>
         </Media>
         {comment.body}
-        <Votes entity={comment}
-          entityType="comment"
-          currentUser={currentUser} />
+        <div className="d-block my-2 float-right">
+          <Votes entity={comment}
+            entityType="comment"
+            currentUser={currentUser} />
+        </div>
       </Media>
     </Media>
   );

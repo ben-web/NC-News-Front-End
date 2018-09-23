@@ -39,9 +39,7 @@ class Comments extends Component {
     const { comments, error } = await api.fetchCommentsByArticleId(articleId)
     
     if (error && error.errorCode !== 404) return this.setState({ error })
-
     comments.sort((a, b) => a.created_at.localeCompare(b.created_at));
-
     this.setState({ comments });
   }
 }

@@ -58,6 +58,7 @@ class Article extends Component {
     if (error) return this.setState({ error });
     this.setState({ article });
   }
+  
 
 }
 

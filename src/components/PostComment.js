@@ -13,27 +13,37 @@ import * as api from '../api';
 class PostComment extends Component {
 
   state = {
-    commentBody: ''
+    commentBody: '',
+    error: null,
+    submitText: 'Submit Post',
+    submitting: false
   }
 
   render() {
     const { article, currentUser } = this.props;
-    const { commentBody } = this.state;
-    console.log(this.props)
+    const { commentBody, error, submitting, submitText } = this.state;
+
+
     if (!currentUser) return (null);
+    if (error) return (
+      <div>
+        <h3 className="text-danger">{error.errorCode} Error</h3>
+        <p className="text-danger">Could not save comment: {error.errorMessage}</p>
+      </div>
+    )
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label for="commentBody">Your comment</Label>
           <Input type="textarea"
             name="commentBody"
-            id="commentBody"
             onChange={this.handleInput}
             value={commentBody}
-            required />
+            required
+            disabled={submitting} />
           <FormText>Post something meaningful here</FormText>
         </FormGroup>
-        <Button>Post Comment</Button>
+        <Button disabled={submitting}>{submitText}</Button>
       </Form>
     );
   }
@@ -46,8 +56,13 @@ class PostComment extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('comment submitted')
-    if (this.state.commentBody.length > 3) this.sendComment();
+    if (this.state.commentBody.length > 3) {
+      this.setState({
+        submitting: true,
+        submitText: 'Sending...'
+      })
+      this.sendComment()
+    }
   }
 
   async sendComment() {
@@ -59,7 +74,11 @@ class PostComment extends Component {
     )
 
     if (error) return this.setState({ error });
-    console.log(comment)
+
+    this.setState({
+      submitting: false,
+      submitText: 'Submit Post'
+    })
   }
 }
 

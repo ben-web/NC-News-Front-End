@@ -50,7 +50,6 @@ export const fetchTopics =
       .then(({ data: { topics } }) => ({ topics }))
   );
 
-
 export const postComment =
   addErrorHandler(
     (articleId, body, userId) => axios
