@@ -11,6 +11,7 @@ class Comments extends Component {
   }
 
   render() {
+    const { currentUser } = this.props;
     const { comments, error } = this.state;
 
     if (error) return <ErrorMessage error={error} />
@@ -20,7 +21,9 @@ class Comments extends Component {
       <Media list>
         {
           comments.map(comment => {
-            return <Comment key={comment._id} comment={comment} />
+            return <Comment key={comment._id} 
+            comment={comment} 
+            currentUser={currentUser}/>
           })
         }
       </Media>
@@ -34,9 +37,11 @@ class Comments extends Component {
   async getComments() {
     const { articleId } = this.props;
     const { comments, error } = await api.fetchCommentsByArticleId(articleId)
-    console.log('fetchComments called');
-
+    
     if (error && error.errorCode !== 404) return this.setState({ error })
+
+    comments.sort((a, b) => a.created_at.localeCompare(b.created_at));
+
     this.setState({ comments });
   }
 }

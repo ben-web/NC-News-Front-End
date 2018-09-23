@@ -45,9 +45,21 @@ export const fetchCommentsByArticleId =
 
 export const fetchTopics =
   addErrorHandler(
-    () => axios
+    (articleId) => axios
       .get(`${DB_URL}/topics`)
       .then(({ data: { topics } }) => ({ topics }))
+  );
+
+
+export const postComment =
+  addErrorHandler(
+    (articleId, body, userId) => axios
+      .post(`${DB_URL}/articles/${articleId}/comments`,
+        {
+          body,
+          created_by: userId
+        })
+      .then(({ data: { comment } }) => ({ comment }))
   );
 
 export const VoteArticle =

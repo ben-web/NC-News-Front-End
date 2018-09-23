@@ -83,9 +83,10 @@ class Articles extends Component {
       ? await api.fetchArticles()
       : await api.fetchArticlesByTopic(topic);
 
-    console.log('fetchArticles called');
-
     if (error) return this.setState({ error });
+
+    articles.sort((b, a) => a.created_at.localeCompare(b.created_at));
+
     this.setState({ articles });
   }
 

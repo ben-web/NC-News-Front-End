@@ -4,8 +4,7 @@ import * as utils from '../utils';
 import Avatar from './Avatar';
 import Votes from './Votes';
 
-const Comment = ({ comment }) => {
-  console.log(comment.created_by.avatar_url)
+const Comment = ({ comment, currentUser }) => {
   return (
     <Media tag="li" className="my-4">
       <Media left top href={`/users/${comment.created_by.username}`}>
@@ -17,8 +16,9 @@ const Comment = ({ comment }) => {
           <small className="float-right text-muted">{utils.formatDate(comment.created_at)}</small>
         </Media>
         {comment.body}
-        <Votes entity={comment} 
-        entityType="comment"/>
+        <Votes entity={comment}
+          entityType="comment"
+          currentUser={currentUser} />
       </Media>
     </Media>
   );
