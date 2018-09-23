@@ -22,7 +22,6 @@ class App extends Component {
 
   render() {
     const {
-      currentTopic,
       currentUser,
       error,
       topics
@@ -36,7 +35,8 @@ class App extends Component {
             <header id="top">
               <Navigation
                 currentUser={currentUser}
-                topics={topics} />
+                topics={topics}
+                signOut={this.signOut} />
             </header>
           </Col>
         </Row>
@@ -83,6 +83,12 @@ class App extends Component {
     const { topics, error } = await api.fetchTopics()
     if (error) return this.setState({ error });
     this.setState({ topics });
+  }
+
+  signOut = () => {
+    this.setState({
+      currentUser: null
+    })
   }
 
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import {
   Collapse,
   Navbar,
@@ -6,13 +7,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
 import logo from '../logo.svg';
+import NavUser from './NavUser';
 
 class Navigation extends Component {
 
@@ -21,7 +19,7 @@ class Navigation extends Component {
   };
 
   render() {
-    const { topics } = this.props;
+    const { currentUser, topics, signOut } = this.props;
     return (
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">
@@ -46,26 +44,7 @@ class Navigation extends Component {
             <NavItem>
               <NavLink href="/somewhere/">Broken</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                User
-                </DropdownToggle>
-              <DropdownMenu right>
-                {
-                  topics.map(topic => {
-                    return (
-                      <DropdownItem key={topic.slug}>
-                        <NavLink href={`/topics/${topic.slug}`}>{topic.title}</NavLink>
-                      </DropdownItem>
-                    )
-                  })
-                }
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                  </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            <NavUser currentUser={currentUser} signOut={signOut} />
           </Nav>
         </Collapse>
       </Navbar>
@@ -77,6 +56,12 @@ class Navigation extends Component {
       navIsOpen: !this.state.navIsOpen
     });
   }
+}
+
+Navigation.propTypes = {
+  currentUser: propTypes.object,
+  topics: propTypes.arrayOf(propTypes.object).isRequired,
+  signOut: propTypes.func
 }
 
 export default Navigation;
