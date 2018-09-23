@@ -21,7 +21,12 @@ class App extends Component {
   };
 
   render() {
-    const { topics, error } = this.state;
+    const {
+      currentTopic,
+      currentUser,
+      error,
+      topics
+    } = this.state;
     if (error) return <ErrorMessage error={error} />
     if (!topics) return <p>Loading topics...</p>
     return (
@@ -29,20 +34,21 @@ class App extends Component {
         <Row>
           <Col>
             <header id="top">
-              <Navigation topics={this.state.topics} />
+              <Navigation
+                currentUser={currentUser}
+                topics={topics} />
             </header>
           </Col>
         </Row>
         <main>
           <Row>
-            <Col lg="9">
+            <Col>
               <Switch>
                 <Route exact path="/" component={Articles} />
                 <Route path="/topics/:topic"
                   render={({ match }) =>
                     <Articles match={match}
-                      currentTopic={this.state.currentTopic}
-                      topics={this.state.topics} />
+                      topics={topics} />
                   } />
                 <Route path="/article/:id"
                   render={({ match }) =>
@@ -54,12 +60,6 @@ class App extends Component {
                   } />
                 } />
               </Switch>
-            </Col>
-            <Col>
-              <aside>
-                <h2>Sidebar</h2>
-                <p>sort options, top users, etc</p>
-              </aside>
             </Col>
           </Row>
         </main>
@@ -81,9 +81,6 @@ class App extends Component {
 
   async getTopics() {
     const { topics, error } = await api.fetchTopics()
-
-    console.log('fetchTopics called');
-
     if (error) return this.setState({ error });
     this.setState({ topics });
   }

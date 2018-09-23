@@ -24,13 +24,11 @@ class Articles extends Component {
   }
 
   render() {
+    const currentTopic = this.props.match.params.topic;
 
     let pageHeading = 'All Articles';
-    if (this.props.match.params.topic) {
-      const { topics } = this.props;
-      const topic = topics.find((topic) => topic.slug === this.props.match.params.topic);
-      const topicTitle = topic ? topic.title : 'Not Found';
-      pageHeading = `${topicTitle}`;
+    if (currentTopic) {
+      pageHeading = this.getTopicTitle(currentTopic);
     }
     document.title = pageHeading;
 
@@ -87,6 +85,13 @@ class Articles extends Component {
 
     if (error) return this.setState({ error });
     this.setState({ articles });
+  }
+
+  getTopicTitle = (slug) => {
+    const { topics } = this.props;
+    const currentTopic = topics.find((topic) => topic.slug === slug);
+    const topicTitle = currentTopic ? currentTopic.title : 'Not Found';
+    return topicTitle;
   }
 
 }

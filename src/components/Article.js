@@ -15,12 +15,12 @@ class Article extends Component {
   render() {
 
     const { article, error } = this.state;
-    
+
     if (error) return <ErrorMessage error={error} />
     if (!article) return <p>Loading...</p>
-    
+
     document.title = article.title;
-    
+
     return (
       <div>
         <h1 className="display-4">{article.title}</h1>
@@ -34,7 +34,9 @@ class Article extends Component {
           <ArticleMeta article={article} />
         </div>
         <span className="clearfix">&nbsp;</span>
-        <Comments articleId={article._id} />
+        <aside>
+          <Comments articleId={article._id} />
+        </aside>
       </div>
     );
   }
