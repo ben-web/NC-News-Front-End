@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import * as api from '../api';
 import * as utils from '../utils';
 import ArticleMeta from './ArticleMeta';
@@ -13,7 +14,7 @@ class Article extends Component {
   }
 
   render() {
-
+    const { currentUser } = this.props;
     const { article, error } = this.state;
 
     if (error) return <ErrorMessage error={error} />
@@ -31,7 +32,7 @@ class Article extends Component {
         </h2>
         <p>{article.body}</p>
         <div className="float-right">
-          <ArticleMeta article={article} />
+          <ArticleMeta article={article} currentUser={currentUser} />
         </div>
         <span className="clearfix">&nbsp;</span>
         <aside>
@@ -54,6 +55,11 @@ class Article extends Component {
     this.setState({ article });
   }
 
+}
+
+Article.propTypes = {
+  currentUser: propTypes.object,
+  match: propTypes.object.isRequired
 }
 
 export default Article;

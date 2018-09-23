@@ -19,6 +19,7 @@ class Votes extends Component {
 
   render() {
     const {
+      currentUser,
       entity: {
         created_by: { name },
         votes,
@@ -31,13 +32,14 @@ class Votes extends Component {
       voted
     } = this.state;
 
+    const votingDisabled = !currentUser || voted;
     let votesDisplay = votes + voteChange;
 
     return (
       <div className="d-inline-block">
         <Button color="secondary" outline
           onClick={this.toggleModal}
-          disabled={voted}>
+          disabled={votingDisabled}>
           Votes <Badge color="dark">{votesDisplay}</Badge>
         </Button>
 
@@ -105,6 +107,7 @@ class Votes extends Component {
 }
 
 Votes.propTypes = {
+  currentuser: propTypes.object,
   entity: propTypes.object.isRequired,
   entityType: propTypes.string.isRequired
 }

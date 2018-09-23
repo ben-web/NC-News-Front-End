@@ -26,8 +26,10 @@ class App extends Component {
       error,
       topics
     } = this.state;
+
     if (error) return <ErrorMessage error={error} />
     if (!topics) return <p>Loading topics...</p>
+    
     return (
       <Container>
         <Row>
@@ -44,15 +46,24 @@ class App extends Component {
           <Row>
             <Col>
               <Switch>
-                <Route exact path="/" component={Articles} />
+                <Route exact path="/" 
+                  render={({match}) =>
+                    <Articles
+                      currentUser={currentUser}
+                      match={match}
+                      topics={topics} />
+                  } /> />
                 <Route path="/topics/:topic"
                   render={({ match }) =>
-                    <Articles match={match}
+                    <Articles
+                      currentUser={currentUser}
+                      match={match}
                       topics={topics} />
                   } />
                 <Route path="/article/:id"
                   render={({ match }) =>
-                    <Article match={match} />
+                    <Article match={match}
+                      currentUser={currentUser} />
                   } />
                 <Route render={() =>
                   <ErrorMessage error={

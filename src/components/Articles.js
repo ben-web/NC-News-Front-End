@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import {
   Card,
   CardBody,
@@ -25,6 +26,7 @@ class Articles extends Component {
 
   render() {
     const currentTopic = this.props.match.params.topic;
+    const { currentUser } = this.props;
 
     let pageHeading = 'All Articles';
     if (currentTopic) {
@@ -60,7 +62,7 @@ class Articles extends Component {
                     <CardLink href={`/article/${article._id}`}>Read More</CardLink>
                   </CardBody>
                   <CardFooter>
-                    <ArticleMeta article={article} />
+                    <ArticleMeta article={article} currentUser={currentUser} />
                   </CardFooter>
                 </Card>
               )
@@ -94,6 +96,11 @@ class Articles extends Component {
     return topicTitle;
   }
 
+}
+
+Articles.propTypes = {
+  currentUser: propTypes.object,
+  match: propTypes.object.isRequired
 }
 
 export default Articles;
