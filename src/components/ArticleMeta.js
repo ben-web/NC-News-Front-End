@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {
-  Badge,
-  Button
-} from 'reactstrap';
+import propTypes from 'prop-types';
+import { Badge } from 'reactstrap';
 import Votes from './Votes';
 
-class ArticleInfo extends Component {
+class ArticleMeta extends Component {
   render() {
     const { article } = this.props;
     const { belongs_to, comments } = article;
@@ -13,10 +11,10 @@ class ArticleInfo extends Component {
       <div>
         <Votes entity={article} entityType="article" />
         &nbsp;
-        <div>
+        <div className="meta-legend">
           Comments <Badge color="dark">{comments}</Badge>
         </div>
-        <br />
+        &nbsp;
         <Badge color="secondary" pill
           href={`/topics/${belongs_to}`}>
           {belongs_to}
@@ -26,4 +24,8 @@ class ArticleInfo extends Component {
   }
 }
 
-export default ArticleInfo;
+ArticleMeta.propTypes = {
+  article: propTypes.object.isRequired
+}
+
+export default ArticleMeta;

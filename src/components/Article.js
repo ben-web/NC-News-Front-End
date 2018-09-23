@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../api';
 import * as utils from '../utils';
-import ArticleInfo from './ArticleInfo';
+import ArticleMeta from './ArticleMeta';
 import Comments from './Comments';
 import ErrorMessage from './ErrorMessage';
 
@@ -31,7 +31,7 @@ class Article extends Component {
         </h2>
         <p>{article.body}</p>
         <div className="float-right">
-        <ArticleInfo article={article} />
+          <ArticleMeta article={article} />
         </div>
         <span className="clearfix">&nbsp;</span>
         <Comments articleId={article._id} />

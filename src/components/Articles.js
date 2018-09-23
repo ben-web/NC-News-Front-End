@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Badge,
   Card,
   CardBody,
   CardColumns,
@@ -15,7 +14,7 @@ import {
 import * as api from '../api';
 import * as utils from '../utils';
 import ErrorMessage from './ErrorMessage';
-import ArticleInfo from './ArticleInfo';
+import ArticleMeta from './ArticleMeta';
 
 class Articles extends Component {
 
@@ -63,13 +62,7 @@ class Articles extends Component {
                     <CardLink href={`/article/${article._id}`}>Read More</CardLink>
                   </CardBody>
                   <CardFooter>
-                    <ArticleInfo article={article} />
-{/*                     Votes: {article.votes} | Comments: {article.comments}
-                    <br />
-                    <Badge color="secondary" pill
-                      href={`/topics/${article.belongs_to}`}>
-                      {article.belongs_to}
-                    </Badge> */}
+                    <ArticleMeta article={article} />
                   </CardFooter>
                 </Card>
               )

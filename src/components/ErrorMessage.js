@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Error = ({error: {errorCode, errorMessage}}) => {
-  console.log(errorCode, '<< Error code')
   return (
     <div>
       <h1 className="display-4">{errorCode}</h1>

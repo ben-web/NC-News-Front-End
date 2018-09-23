@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap';
+import * as api from '../api';
 
 class Votes extends Component {
   state = {
@@ -19,8 +20,8 @@ class Votes extends Component {
   render() {
     const {
       entity: {
+        created_by: { name },
         votes,
-        created_by: { name }
       }
     } = this.props;
 
@@ -33,7 +34,7 @@ class Votes extends Component {
     let votesDisplay = votes + voteChange;
 
     return (
-      <div>
+      <div className="d-inline-block">
         <Button color="secondary" outline
           onClick={this.toggleModal}
           disabled={voted}>
@@ -45,9 +46,9 @@ class Votes extends Component {
             Vote on {name}'s content
           </ModalHeader>
           <ModalBody className="text-center">
-            Votes
-            <br />
-            <Badge color="dark">{votesDisplay}</Badge>
+            <div className="meta-legend">
+              Votes <Badge color="dark">{votesDisplay}</Badge>
+            </div>
           </ModalBody>
           <ModalFooter className="bg-light">
             <Button color="primary"
@@ -75,8 +76,8 @@ class Votes extends Component {
   }
 
   handleVote = (direction) => {
-    /* Call API */
-    console.log('handleVote called')
+
+    this.makeVote(direction);
 
     this.setState({
       voted: true,
@@ -84,6 +85,21 @@ class Votes extends Component {
         ? 1
         : -1
     });
+  }
+
+  async makeVote(direction) {
+    const {
+      entity: {
+        _id,
+      },
+      entityType
+    } = this.props;
+
+    if (entityType === 'comment') {
+      await api.VoteComment(_id, direction);
+    } else if (entityType === 'article') {
+      await api.VoteArticle(_id, direction);
+    }
   }
 
 }

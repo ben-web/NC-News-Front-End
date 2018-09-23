@@ -7,8 +7,8 @@ const addErrorHandler = (func) => {
     return func(...args)
       .catch(({ response }) => {
         const error = {
-          errorCode: response.status,
-          errorMessage: response.data.message
+          errorCode: (response) ? response.status : 999,
+          errorMessage: (response) ? response.data.message : 'No Response / Network Error'
         };
         return { error };
       })
@@ -50,10 +50,15 @@ export const fetchTopics =
       .then(({ data: { topics } }) => ({ topics }))
   );
 
+export const VoteArticle =
+  (articleId, direction) => axios
+    .patch(`${DB_URL}/articles/${articleId}?vote=${direction}`)
+    .then(({ data: { article } }) => ({ article }))
+    .catch(console.log);
+
 export const VoteComment =
-  addErrorHandler(
-    (commentId, direction) => axios
-      .patch(`${DB_URL}/comments/${commentId}?vote=${direction}`)
-      .then(({ data: { comment } }) => ({ comment }))
-  );
+  (commentId, direction) => axios
+    .patch(`${DB_URL}/comments/${commentId}?vote=${direction}`)
+    .then(({ data: { comment } }) => ({ comment }))
+    .catch(console.log);
 
