@@ -71,7 +71,6 @@ class Votes extends Component {
   }
 
   toggleModal = () => {
-    console.log('toggleModal called')
     this.setState({
       modalIsOpen: !this.state.modalIsOpen
     });

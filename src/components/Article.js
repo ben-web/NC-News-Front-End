@@ -10,12 +10,13 @@ import PostComment from './PostComment';
 class Article extends Component {
   state = {
     article: null,
+    comments: null,
     error: null
   }
 
   render() {
     const { currentUser } = this.props;
-    const { article, error } = this.state;
+    const { article, comments, error } = this.state;
 
     if (error) return <ErrorMessage error={error} />
     if (!article) return <p>Loading...</p>
@@ -39,8 +40,11 @@ class Article extends Component {
         <span className="clearfix">&nbsp;</span>
         <aside>
           <Comments article={article}
-            currentUser={currentUser} />
-          <PostComment article={article}
+            comments={comments}
+            currentUser={currentUser}
+            removeComment={this.removeComment} />
+          <PostComment addComment={this.addComment}
+            article={article}
             currentUser={currentUser} />
         </aside>
       </div>
@@ -49,6 +53,7 @@ class Article extends Component {
 
   componentDidMount() {
     this.getArticle();
+    this.getComments();
   }
 
   async getArticle() {
@@ -58,7 +63,32 @@ class Article extends Component {
     if (error) return this.setState({ error });
     this.setState({ article });
   }
-  
+
+  async getComments() {
+    const { id } = this.props.match.params;
+    const { comments, error } = await api.fetchCommentsByArticleId(id)
+
+    if (error && error.errorCode !== 404) return this.setState({ error })
+
+    comments.sort((a, b) => a.created_at.localeCompare(b.created_at));
+    this.setState({ comments });
+  }
+
+  addComment = comment => {
+    this.setState({
+      comments: [...this.state.comments, comment]
+    });
+  }
+
+  removeComment = commentToRemove => {
+    let newComments = this.state.comments.filter(comment => {
+      return comment._id !== commentToRemove._id;
+    });
+    this.setState({
+      comments: newComments
+    });
+  }
+
 
 }
 

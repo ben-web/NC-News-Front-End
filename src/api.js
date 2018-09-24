@@ -50,6 +50,13 @@ export const fetchTopics =
       .then(({ data: { topics } }) => ({ topics }))
   );
 
+export const deleteComment =
+  addErrorHandler(
+    commentId => axios
+      .delete(`${DB_URL}/comments/${commentId}`)
+      .then(({ data: { comment } }) => ({ comment }))
+  );
+
 export const postComment =
   addErrorHandler(
     (articleId, body, userId) => axios

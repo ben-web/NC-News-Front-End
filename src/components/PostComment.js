@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import {
+  Alert,
   Button,
   Form,
   FormGroup,
   FormText,
   Input,
-  Label,
-  Media
+  Label
 } from 'reactstrap';
 import * as api from '../api';
-import Comment from './Comment';
 
 class PostComment extends Component {
 
@@ -24,22 +23,16 @@ class PostComment extends Component {
 
   render() {
     const { currentUser } = this.props;
-    const { comment, commentBody, error, submitting, submitText } = this.state;
+    const { commentBody, error, submitting, submitText } = this.state;
 
     if (!currentUser) return (null);
+
     if (error) return (
-      <div>
-        <h3 className="text-danger">{error.errorCode} Error</h3>
-        <p className="text-danger">Could not save comment: {error.errorMessage}</p>
-      </div>
+      <Alert color="danger">
+        Could not post comment: {error.errorCode} {error.errorMessage}
+      </Alert>
     )
-    if (comment) return (
-      <Media list>
-        <Comment
-          comment={comment}
-          currentUser={currentUser} />
-      </Media>
-    )
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
@@ -52,7 +45,7 @@ class PostComment extends Component {
             disabled={submitting} />
           <FormText>Post something meaningful here</FormText>
         </FormGroup>
-        <Button disabled={submitting}>{submitText}</Button>
+        <Button color="primary" disabled={submitting}>{submitText}</Button>
       </Form>
     );
   }
@@ -75,7 +68,7 @@ class PostComment extends Component {
   }
 
   async sendComment() {
-    const { article, currentUser } = this.props;
+    const { addComment, article, currentUser } = this.props;
     const { comment, error } = await api.postComment(
       article._id,
       this.state.commentBody,
@@ -84,8 +77,9 @@ class PostComment extends Component {
 
     if (error) return this.setState({ error });
 
+    addComment(comment);
+
     this.setState({
-      comment: comment,
       commentBody: '',
       submitting: false,
       submitText: 'Submit Post'
