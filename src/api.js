@@ -57,6 +57,18 @@ export const deleteComment =
       .then(({ data: { comment } }) => ({ comment }))
   );
 
+export const postArticle =
+  addErrorHandler(
+    (body, title, topicSlug, userId) => axios
+      .post(`${DB_URL}/topics/${topicSlug}/articles`,
+        {
+          title,
+          body,
+          created_by: userId
+        })
+      .then(({ data: { article } }) => ({ article }))
+  );
+
 export const postComment =
   addErrorHandler(
     (articleId, body, userId) => axios

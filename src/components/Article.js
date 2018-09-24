@@ -5,7 +5,7 @@ import * as utils from '../utils';
 import ArticleMeta from './ArticleMeta';
 import Comments from './Comments';
 import ErrorMessage from './ErrorMessage';
-import PostComment from './PostComment';
+import NewComment from './NewComment';
 
 class Article extends Component {
   state = {
@@ -43,9 +43,9 @@ class Article extends Component {
             comments={comments}
             currentUser={currentUser}
             removeComment={this.removeComment} />
-          <PostComment addComment={this.addComment}
+          {currentUser && <NewComment addComment={this.addComment}
             article={article}
-            currentUser={currentUser} />
+            currentUser={currentUser} />}
         </aside>
       </div>
     );
@@ -66,9 +66,10 @@ class Article extends Component {
 
   async getComments() {
     const { id } = this.props.match.params;
-    const { comments, error } = await api.fetchCommentsByArticleId(id)
+    const { comments, error } = await api.fetchCommentsByArticleId(id);
 
-    if (error && error.errorCode !== 404) return this.setState({ error })
+    if (error && error.errorCode !== 404) return this.setState({ error });
+    if (error && error.errorCode === 404) return;
 
     comments.sort((a, b) => a.created_at.localeCompare(b.created_at));
     this.setState({ comments });

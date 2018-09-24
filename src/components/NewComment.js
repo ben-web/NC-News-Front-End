@@ -11,21 +11,18 @@ import {
 } from 'reactstrap';
 import * as api from '../api';
 
-class PostComment extends Component {
+class NewComment extends Component {
 
   state = {
     comment: null,
     commentBody: '',
     error: null,
-    submitText: 'Submit Post',
+    submitText: 'Submit Comment',
     submitting: false
   }
 
   render() {
-    const { currentUser } = this.props;
     const { commentBody, error, submitting, submitText } = this.state;
-
-    if (!currentUser) return (null);
 
     if (error) return (
       <Alert color="danger">
@@ -50,13 +47,13 @@ class PostComment extends Component {
     );
   }
 
-  handleInput = (e) => {
+  handleInput = e => {
     this.setState({
       commentBody: e.target.value
     })
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     if (this.state.commentBody.length > 3) {
       this.setState({
@@ -82,14 +79,14 @@ class PostComment extends Component {
     this.setState({
       commentBody: '',
       submitting: false,
-      submitText: 'Submit Post'
+      submitText: 'Submit Comment'
     })
   }
 }
 
-PostComment.propTypes = {
+NewComment.propTypes = {
   article: propTypes.object,
   currentUser: propTypes.object
 }
 
-export default PostComment;
+export default NewComment;

@@ -69,7 +69,6 @@ class DeleteComment extends Component {
     this.props.removeComment(comment);
   }
 
-
 }
 
 DeleteComment.propTypes = {
