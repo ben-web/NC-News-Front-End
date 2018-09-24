@@ -19,11 +19,20 @@ class Navigation extends Component {
   };
 
   render() {
-    const { currentUser, topics, signOut } = this.props;
+    const {
+      currentUser,
+      signOut,
+      topics
+    } = this.props;
     return (
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" 
+      light expand="md">
         <NavbarBrand href="/">
-          <img src={logo} className="d-inline-block align-top mr-3" width="30" height="30" alt="NC News" />
+          <img src={logo} 
+          className="d-inline-block align-top mr-3" 
+          width="30" 
+          height="30" 
+          alt="NC News" />
           NC News
         </NavbarBrand>
         <NavbarToggler onClick={this.toggleNav} />
@@ -36,13 +45,17 @@ class Navigation extends Component {
               topics.map(topic => {
                 return (
                   <NavItem key={topic.slug}>
-                    <NavLink href={`/topics/${topic.slug}`}>{topic.title}</NavLink>
+                    <NavLink href={`/topics/${topic.slug}`}>
+                    {topic.title}
+                    </NavLink>
                   </NavItem>
                 )
               })
             }
             <NavItem>
-              <NavLink href="/somewhere/">Broken</NavLink>
+              <NavLink href="/somewhere/">
+              Broken
+              </NavLink>
             </NavItem>
             <NavUser currentUser={currentUser} signOut={signOut} />
           </Nav>

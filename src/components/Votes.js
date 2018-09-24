@@ -37,14 +37,21 @@ class Votes extends Component {
 
     return (
       <div className="d-inline-block">
-        <Button color="secondary" outline
+        <Button color="secondary"
+          outline
           onClick={this.toggleModal}
           disabled={votingDisabled}>
-          Votes <Badge color="dark">{votesDisplay}</Badge>
+          Votes &nbsp;
+          <Badge color="dark">
+            {votesDisplay}
+          </Badge>
         </Button>
 
-        <Modal isOpen={modalIsOpen} toggle={this.toggleModal} backdrop={true}>
-          <ModalHeader toggle={this.toggleModal} className="bg-light">
+        <Modal isOpen={modalIsOpen}
+          toggle={this.toggleModal}
+          backdrop={true}>
+          <ModalHeader toggle={this.toggleModal}
+            className="bg-light">
             Vote on {name}'s content
           </ModalHeader>
           <ModalBody className="text-center">
@@ -77,7 +84,6 @@ class Votes extends Component {
   }
 
   handleVote = (direction) => {
-
     this.makeVote(direction);
 
     this.setState({
@@ -106,7 +112,7 @@ class Votes extends Component {
 }
 
 Votes.propTypes = {
-  currentuser: propTypes.object,
+  currentUser: propTypes.object,
   entity: propTypes.object.isRequired,
   entityType: propTypes.string.isRequired
 }

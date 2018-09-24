@@ -17,8 +17,14 @@ class DeleteComment extends Component {
   }
 
   render() {
-    const { comment, currentUser } = this.props;
-    const { error, modalIsOpen } = this.state;
+    const { 
+      comment, 
+      currentUser 
+    } = this.props;
+    const { 
+      error, 
+      modalIsOpen 
+    } = this.state;
 
     if (error) return (
       <Alert color="danger">
@@ -34,8 +40,11 @@ class DeleteComment extends Component {
           onClick={this.toggleModal}>
           Delete
         </Button>
-        <Modal isOpen={modalIsOpen} toggle={this.toggleModal} backdrop={true}>
-          <ModalHeader toggle={this.toggleModal} className="bg-light">
+        <Modal isOpen={modalIsOpen} 
+        toggle={this.toggleModal} 
+        backdrop={true}>
+          <ModalHeader toggle={this.toggleModal} 
+          className="bg-light">
             Confirm Delete
           </ModalHeader>
           <ModalBody className="text-center">

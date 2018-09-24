@@ -14,8 +14,8 @@ import {
 } from 'reactstrap';
 import * as api from '../api';
 import * as utils from '../utils';
-import ErrorMessage from './ErrorMessage';
 import ArticleMeta from './ArticleMeta';
+import ErrorMessage from './ErrorMessage';
 
 class Articles extends Component {
 
@@ -34,7 +34,10 @@ class Articles extends Component {
     }
     document.title = pageHeading;
 
-    const { articles, error } = this.state;
+    const {
+      articles,
+      error
+    } = this.state;
 
     if (error) return <ErrorMessage error={error} />
     if (!articles) return <p>Loading articles...</p>
@@ -49,20 +52,29 @@ class Articles extends Component {
               return (
                 <Card key={article._id} className="text-center">
                   <CardImg top width="100%" src={utils.randomImageUrl(500, 300)} alt="Article Leader" />
-                  <CardHeader>{utils.formatDate(article.created_at)}</CardHeader>
+                  <CardHeader>
+                    {utils.formatDate(article.created_at)}
+                  </CardHeader>
                   <CardBody>
-                    <CardTitle>{article.title}</CardTitle>
+                    <CardTitle>
+                      {article.title}
+                    </CardTitle>
                     <CardSubtitle className="my-3 text-muted">
                       {article.created_by.name}
-                      <span className="d-block mt-2 font-italic">{utils.formatDate(article.created_at)}</span>
+                      <span className="d-block mt-2 font-italic">
+                        {utils.formatDate(article.created_at)}
+                      </span>
                     </CardSubtitle>
                     <CardText>
                       {article.body.split(' ').splice(0, 34).join(' ')}&hellip;
                     </CardText>
-                    <CardLink href={`/article/${article._id}`}>Read More</CardLink>
+                    <CardLink href={`/article/${article._id}`}>
+                      Read More
+                    </CardLink>
                   </CardBody>
                   <CardFooter>
-                    <ArticleMeta article={article} currentUser={currentUser} />
+                    <ArticleMeta article={article}
+                      currentUser={currentUser} />
                   </CardFooter>
                 </Card>
               )
@@ -79,9 +91,12 @@ class Articles extends Component {
 
   async getArticles() {
     const { topic } = this.props.match.params;
-    const { articles, error } = (!topic)
-      ? await api.fetchArticles()
-      : await api.fetchArticlesByTopic(topic);
+    const {
+      articles,
+      error
+    } = (!topic)
+        ? await api.fetchArticles()
+        : await api.fetchArticlesByTopic(topic);
 
     if (error) return this.setState({ error });
 
@@ -101,7 +116,8 @@ class Articles extends Component {
 
 Articles.propTypes = {
   currentUser: propTypes.object,
-  match: propTypes.object.isRequired
+  match: propTypes.object.isRequired,
+  topics: propTypes.arrayOf(propTypes.object).isRequired
 }
 
 export default Articles;

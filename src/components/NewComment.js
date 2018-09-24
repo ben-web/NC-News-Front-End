@@ -22,7 +22,12 @@ class NewComment extends Component {
   }
 
   render() {
-    const { commentBody, error, submitting, submitText } = this.state;
+    const {
+      commentBody,
+      error,
+      submitting,
+      submitText
+    } = this.state;
 
     if (error) return (
       <Alert color="danger">
@@ -33,14 +38,18 @@ class NewComment extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
-          <Label for="commentBody">Your comment</Label>
+          <Label for="commentBody">
+            Your comment
+          </Label>
           <Input type="textarea"
             name="commentBody"
             onChange={this.handleInput}
             value={commentBody}
             required
             disabled={submitting} />
-          <FormText>Post something meaningful here</FormText>
+          <FormText>
+            Post something meaningful here
+            </FormText>
         </FormGroup>
         <Button color="primary" disabled={submitting}>{submitText}</Button>
       </Form>
@@ -65,12 +74,18 @@ class NewComment extends Component {
   }
 
   async sendComment() {
-    const { addComment, article, currentUser } = this.props;
-    const { comment, error } = await api.postComment(
-      article._id,
-      this.state.commentBody,
-      currentUser._id
-    )
+    const {
+      addComment,
+      article,
+      currentUser
+    } = this.props;
+    const {
+      comment,
+      error } = await api.postComment(
+        article._id,
+        this.state.commentBody,
+        currentUser._id
+      )
 
     if (error) return this.setState({ error });
 
@@ -85,7 +100,8 @@ class NewComment extends Component {
 }
 
 NewComment.propTypes = {
-  article: propTypes.object,
+  addComment: propTypes.func.isRequired,
+  article: propTypes.object.isRequired,
   currentUser: propTypes.object
 }
 

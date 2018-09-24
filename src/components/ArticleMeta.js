@@ -5,8 +5,14 @@ import Votes from './Votes';
 
 class ArticleMeta extends Component {
   render() {
-    const { article, currentUser } = this.props;
-    const { belongs_to, comments } = article;
+    const {
+      article,
+      currentUser
+    } = this.props;
+    const {
+      belongs_to,
+      comments
+    } = article;
     return (
       <div>
         <Votes entity={article}
@@ -14,10 +20,15 @@ class ArticleMeta extends Component {
           currentUser={currentUser} />
         &nbsp;
         <div className="meta-legend">
-          Comments <Badge color="dark">{comments}</Badge>
+          Comments &nbsp;
+          <Badge
+            color="dark">
+            {comments}
+          </Badge>
         </div>
         &nbsp;
-        <Badge color="secondary" pill
+        <Badge color="secondary"
+          pill
           href={`/topics/${belongs_to}`}>
           {belongs_to}
         </Badge>
@@ -28,7 +39,7 @@ class ArticleMeta extends Component {
 
 ArticleMeta.propTypes = {
   article: propTypes.object.isRequired,
-  currentuser: propTypes.object
+  currentUser: propTypes.object
 }
 
 export default ArticleMeta;

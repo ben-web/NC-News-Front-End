@@ -58,7 +58,9 @@ class NewArticle extends Component {
               value={title}
               required
               disabled={submitting} />
-            <FormText>Choose a meaningful title</FormText>
+            <FormText>
+              Choose a meaningful title
+              </FormText>
           </FormGroup>
           <FormGroup>
             <Label for="topic">Topic</Label>
@@ -82,7 +84,9 @@ class NewArticle extends Component {
               value={body}
               required
               disabled={submitting} />
-            <FormText>Please check your spelling before submitting</FormText>
+            <FormText>
+              Please check your spelling before submitting
+              </FormText>
           </FormGroup>
           <Button color="primary" disabled={submitting}>{submitText}</Button>
         </Form>
@@ -113,17 +117,18 @@ class NewArticle extends Component {
       topic
     } = this.state;
 
-    const { article, error } = await api.postArticle(
-      body,
-      title,
-      topic,
-      currentUser._id
-    )
+    const {
+      article,
+      error } = await api.postArticle(
+        body,
+        title,
+        topic,
+        currentUser._id
+      )
 
     if (error) return this.setState({ error });
 
     this.setState({ article });
-
   }
 
 }
