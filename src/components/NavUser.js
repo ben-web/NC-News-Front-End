@@ -12,7 +12,7 @@ import {
 const NavUser = ({currentUser, signOut}) => {
   if (!currentUser) return (
     <NavItem>
-      <NavLink href="#">Sign In</NavLink>
+      <NavLink href="/">Sign In</NavLink>
     </NavItem>
   )
   return (
