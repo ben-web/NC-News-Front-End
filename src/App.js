@@ -84,7 +84,7 @@ class App extends Component {
           <Col>
             <footer>
               <p><a href="#top">Back to top</a></p>
-              <p><small>&copy; NC News 2018</small></p>
+              <p><small><a href="https://github.com/ben-web/FE2-NC-News">Github Repository</a></small></p>
             </footer>
           </Col>
         </Row>

@@ -10,7 +10,7 @@ It demonstrates some of the skills students learn in three weeks of frontend stu
 * React Routing
 * ==Some other stuff==
 
-This project is built in React.js, and interacts with the backend API published at: [ben-web-nc-news.herokuapp.com](https://ben-web-nc-news.herokuapp.com/).
+This project is built in React.js, and interacts with the backend API published at: [ben-web-nc-news.herokuapp.com](https://ben-web-nc-news.herokuapp.com/). The backend repository is explained at [github.com/ben-web/BE2-northcoders-news](https://github.com/ben-web/BE2-northcoders-news).
 
 A working example of this API is available at [ben-web-nc-news-fe.herokuapp.com](https://ben-web-nc-news-fe.herokuapp.com/).
 
@@ -61,15 +61,13 @@ If successful, your browser should open at [http://localhost:3000](http://localh
 
 ### Deploy the application
 
-Please see your hosting provider's documentation for instructions on deploying to their environment.
-
-For demonstration purposes, the example application uses [Heroku Cloud Hosting](https://www.heroku.com/). Instructions for their service may be found here: [devcenter.heroku.com/articles/getting-started-with-nodejs](https://devcenter.heroku.com/articles/getting-started-with-nodejs).
+==TBA==
 
 ## Built With
 
 * [Node.js](https://nodejs.org/) - JavaScript runtime built on [Chrome's V8 JavaScript engine](https://developers.google.com/v8/)
-* React.js
-* Reactstrap - A Bootstrap 4 wrapper for React
+* [React.js](https://reactjs.org/) - Facebook's JavaScript library for building user interfaces
+* [Reactstrap](https://reactstrap.github.io/) - A Bootstrap 4 wrapper for React
 
 ## Author
 
