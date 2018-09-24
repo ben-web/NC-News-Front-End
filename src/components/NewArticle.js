@@ -20,7 +20,7 @@ class NewArticle extends Component {
     submitText: 'Submit Article',
     submitting: false,
     title: '',
-    topic: ''
+    topic: 'coding'
   }
   render() {
     const {
@@ -35,7 +35,7 @@ class NewArticle extends Component {
 
     if (error) return (
       <Alert color="danger">
-        Could not post comment: {error.errorCode} {error.errorMessage}
+        Could not post article: {error.errorCode} {error.errorMessage}
       </Alert>
     )
 
