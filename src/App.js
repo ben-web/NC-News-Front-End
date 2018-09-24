@@ -6,6 +6,7 @@ import Article from './components/Article';
 import Articles from './components/Articles';
 import ErrorMessage from './components/ErrorMessage';
 import Navigation from './components/Navigation';
+import NewArticle from './components/NewArticle';
 
 class App extends Component {
 
@@ -29,7 +30,7 @@ class App extends Component {
 
     if (error) return <ErrorMessage error={error} />
     if (!topics) return <p>Loading topics...</p>
-    
+
     return (
       <Container>
         <Row>
@@ -46,8 +47,8 @@ class App extends Component {
           <Row>
             <Col>
               <Switch>
-                <Route exact path="/" 
-                  render={({match}) =>
+                <Route exact path="/"
+                  render={({ match }) =>
                     <Articles
                       currentUser={currentUser}
                       match={match}
@@ -64,6 +65,11 @@ class App extends Component {
                   render={({ match }) =>
                     <Article match={match}
                       currentUser={currentUser} />
+                  } />
+                <Route path="/new-article"
+                  render={() =>
+                    <NewArticle currentUser={currentUser}
+                      topics={topics} />
                   } />
                 <Route render={() =>
                   <ErrorMessage error={

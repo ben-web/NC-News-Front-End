@@ -22,7 +22,7 @@ const NavUser = ({currentUser, signOut}) => {
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownItem>
-          <NavLink href={`#`}>TBA</NavLink>
+          <NavLink href={"/new-article"}>New Article</NavLink>
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={() => signOut()}>
