@@ -69,15 +69,16 @@ class Article extends Component {
     const { comments, error } = await api.fetchCommentsByArticleId(id);
 
     if (error && error.errorCode !== 404) return this.setState({ error });
-    if (error && error.errorCode === 404) return;
+    if (error && error.errorCode === 404) return this.setState({ comments: null });
 
     comments.sort((a, b) => a.created_at.localeCompare(b.created_at));
     this.setState({ comments });
   }
 
   addComment = comment => {
+    const { comments } = this.state;
     this.setState({
-      comments: [...this.state.comments, comment]
+      comments: [...comments, comment]
     });
   }
 
