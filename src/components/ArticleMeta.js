@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { Badge } from 'reactstrap';
 import Votes from './Votes';
@@ -29,7 +30,8 @@ class ArticleMeta extends Component {
         &nbsp;
         <Badge color="secondary"
           pill
-          href={`/topics/${belongs_to}`}>
+          tag={Link}
+          to={`/topics/${belongs_to}`}>
           {belongs_to}
         </Badge>
       </div>

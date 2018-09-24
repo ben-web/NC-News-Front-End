@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import {
   Card,
@@ -68,7 +69,7 @@ class Articles extends Component {
                     <CardText>
                       {article.body.split(' ').splice(0, 34).join(' ')}&hellip;
                     </CardText>
-                    <CardLink href={`/article/${article._id}`}>
+                    <CardLink tag={Link} to={`/article/${article._id}`}>
                       Read More
                     </CardLink>
                   </CardBody>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import {
   Collapse,
@@ -25,38 +26,33 @@ class Navigation extends Component {
       topics
     } = this.props;
     return (
-      <Navbar color="light" 
-      light expand="md">
-        <NavbarBrand href="/">
-          <img src={logo} 
-          className="d-inline-block align-top mr-3" 
-          width="30" 
-          height="30" 
-          alt="NC News" />
+      <Navbar color="light"
+        light expand="md">
+        <NavbarBrand tag={Link} to="/">
+          <img src={logo}
+            className="d-inline-block align-top mr-3"
+            width="30"
+            height="30"
+            alt="NC News" />
           NC News
         </NavbarBrand>
         <NavbarToggler onClick={this.toggleNav} />
         <Collapse isOpen={this.state.navIsOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/">Home</NavLink>
+              <NavLink tag={Link} to="/">Home</NavLink>
             </NavItem>
             {
               topics.map(topic => {
                 return (
                   <NavItem key={topic.slug}>
-                    <NavLink href={`/topics/${topic.slug}`}>
-                    {topic.title}
+                    <NavLink tag={Link} to={`/topics/${topic.slug}`}>
+                      {topic.title}
                     </NavLink>
                   </NavItem>
                 )
               })
             }
-            <NavItem>
-              <NavLink href="/somewhere/">
-              Broken
-              </NavLink>
-            </NavItem>
             <NavUser currentUser={currentUser} signOut={signOut} />
           </Nav>
         </Collapse>

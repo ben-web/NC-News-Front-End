@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import {
   NavItem,
@@ -9,7 +10,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-const NavUser = ({currentUser, signOut}) => {
+const NavUser = ({ currentUser, signOut }) => {
   if (!currentUser) return (
     <NavItem>
       <NavLink href="/">Sign In</NavLink>
@@ -21,10 +22,8 @@ const NavUser = ({currentUser, signOut}) => {
         {currentUser.name}
       </DropdownToggle>
       <DropdownMenu right>
-        <DropdownItem>
-          <NavLink href={"/new-article"}>
+        <DropdownItem tag={Link} to="/new-article">
           New Article
-          </NavLink>
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={() => signOut()}>
