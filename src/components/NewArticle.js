@@ -102,7 +102,6 @@ class NewArticle extends Component {
       submitting: true,
       submitText: 'Sending...'
     })
-    console.log(this.state)
     this.sendArticle();
   }
 

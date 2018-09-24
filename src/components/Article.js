@@ -77,8 +77,11 @@ class Article extends Component {
 
   addComment = comment => {
     const { comments } = this.state;
+    const newComments = [];
+    if (comments) newComments.push(...comments);
+    newComments.push(comment);
     this.setState({
-      comments: [...comments, comment]
+      comments: newComments
     });
   }
 
