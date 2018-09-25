@@ -34,7 +34,7 @@ class Navigation extends Component {
             width="30"
             height="30"
             alt="NC News" />
-          NC News
+          Ben Web's NC News
         </NavbarBrand>
         <NavbarToggler onClick={this.toggleNav} />
         <Collapse isOpen={this.state.navIsOpen} navbar>

@@ -56,7 +56,10 @@ class Votes extends Component {
           </ModalHeader>
           <ModalBody className="text-center">
             <div className="meta-legend">
-              Votes <Badge color="dark">{votesDisplay}</Badge>
+              Votes &nbsp;
+              <Badge color="dark">
+                {votesDisplay}
+              </Badge>
             </div>
           </ModalBody>
           <ModalFooter className="bg-light">

@@ -51,13 +51,16 @@ class Articles extends Component {
           {
             articles.map(article => {
               return (
-                <Card key={article._id} className="text-center">
-                  <CardImg top width="100%" src={utils.randomImageUrl(500, 300)} alt="Article Leader" />
+                <Card key={article._id}
+                  className="text-center">
+                  {/* Random image used here as none stored in database */}
+                  <CardImg top width="100%"
+                    src={utils.randomImageUrl(500, 300)} alt="Article Leader" />
                   <CardHeader>
                     {utils.formatDate(article.created_at)}
                   </CardHeader>
                   <CardBody>
-                    <CardTitle>
+                    <CardTitle >
                       {article.title}
                     </CardTitle>
                     <CardSubtitle className="my-3 text-muted">
