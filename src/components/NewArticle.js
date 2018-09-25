@@ -70,7 +70,8 @@ class NewArticle extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="topic">Topic</Label>
-            <Input type="select" name="topic"
+            <Input type="select"
+              name="topic"
               onChange={this.handleInput}
               disabled={submitting}
               value={topic}>
@@ -88,6 +89,7 @@ class NewArticle extends Component {
             </Label>
             <Input type="textarea"
               name="body"
+              rows="10"
               onChange={this.handleInput}
               value={body}
               required

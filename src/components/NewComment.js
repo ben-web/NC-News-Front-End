@@ -42,6 +42,7 @@ class NewComment extends Component {
             Your comment
           </Label>
           <Input type="textarea"
+            rows="4"
             name="commentBody"
             onChange={this.handleInput}
             value={commentBody}
