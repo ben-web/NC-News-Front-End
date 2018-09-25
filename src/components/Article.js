@@ -77,8 +77,10 @@ class Article extends Component {
 
   async getComments() {
     const { id } = this.props.match.params;
-    const { comments,
-      error } = await api.fetchCommentsByArticleId(id);
+    const { 
+      comments,
+      error 
+    } = await api.fetchCommentsByArticleId(id);
 
     if (error && error.errorCode !== 404) return this.setState({ error });
     if (error && error.errorCode === 404) return this.setState({ comments: null });

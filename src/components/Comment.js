@@ -11,7 +11,7 @@ const Comment = ({
   currentUser, 
   removeComment }) => {
   return (
-    <Media tag="li" className="my-4">
+    <Media tag="li" className="my-3 pt-3 border-top border-light">
       <Media left top 
       href={`/users/${comment.created_by.username}`}>
         <Avatar avatarUrl={comment.created_by.avatar_url} 
@@ -20,7 +20,7 @@ const Comment = ({
       <Media body>
         <Media heading>
           {comment.created_by.name}
-          <small className="float-right text-muted">
+          <small className="float-right text-muted font-italic">
           {utils.formatDate(comment.created_at)}
           </small>
         </Media>

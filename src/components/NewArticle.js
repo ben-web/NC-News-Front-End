@@ -17,7 +17,7 @@ class NewArticle extends Component {
     article: null,
     body: '',
     error: null,
-    submitText: 'Submit Article',
+    submitText: 'Publish Article',
     submitting: false,
     title: '',
     topic: 'coding'
@@ -112,7 +112,7 @@ class NewArticle extends Component {
     e.preventDefault();
     this.setState({
       submitting: true,
-      submitText: 'Sending...'
+      submitText: 'Saving...'
     })
     this.sendArticle();
   }

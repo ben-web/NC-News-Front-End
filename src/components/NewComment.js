@@ -17,7 +17,7 @@ class NewComment extends Component {
     comment: null,
     commentBody: '',
     error: null,
-    submitText: 'Submit Comment',
+    submitText: 'Publish Comment',
     submitting: false
   }
 
@@ -67,7 +67,7 @@ class NewComment extends Component {
     if (this.state.commentBody.length > 3) {
       this.setState({
         submitting: true,
-        submitText: 'Sending...'
+        submitText: 'Saving...'
       })
       this.sendComment()
     }
@@ -94,7 +94,7 @@ class NewComment extends Component {
     this.setState({
       commentBody: '',
       submitting: false,
-      submitText: 'Submit Comment'
+      submitText: 'Publish Comment'
     })
   }
 }
