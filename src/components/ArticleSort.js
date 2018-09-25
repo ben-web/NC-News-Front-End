@@ -14,7 +14,7 @@ class ArticleSort extends Component {
 
     return (
       <Form className="text-right">
-        <FormGroup tag="fieldset">
+        <FormGroup tag="fieldset" className="py-1 bg-light">
           <FormGroup check inline>
             <Label check>
               <Input type="radio"

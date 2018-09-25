@@ -10,7 +10,7 @@ const Comments = ({
 }) => {
   if (!comments) return <p>No comments for this article</p>
   return (
-    <Media list>
+    <Media list className="pl-1 pl-sm-4">
       {
         comments.map(comment => {
           return <Comment key={comment._id}
