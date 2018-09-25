@@ -31,7 +31,7 @@ class Article extends Component {
       <div>
         <h1 className="display-4">{article.title}</h1>
         <img className="article-image"
-          src={utils.randomImageUrl(840, 400)}
+          src={article.imageUrl}
           alt={article.title}
           width="100%" />
         <h2 className="display-5 text-muted">

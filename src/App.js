@@ -12,7 +12,7 @@ class App extends Component {
 
   state = {
     currentUser: {
-      _id: "5b785a65f0e7ab0ac5c99ee5",
+      _id: '5baa3e916ab1485e0adeb55d',
       username: "jessjelly",
       name: "Jess Jelly",
       avatar_url: "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg"

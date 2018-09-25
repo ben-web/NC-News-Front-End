@@ -17,12 +17,14 @@ import * as api from '../api';
 import * as utils from '../utils';
 import ArticleMeta from './ArticleMeta';
 import ErrorMessage from './ErrorMessage';
+import ArticleSort from './ArticleSort';
 
 class Articles extends Component {
 
   state = {
     articles: null,
-    error: null
+    error: null,
+    sortCriteria: 'created_at'
   }
 
   render() {
@@ -37,7 +39,8 @@ class Articles extends Component {
 
     const {
       articles,
-      error
+      error,
+      sortCriteria
     } = this.state;
 
     if (error) return <ErrorMessage error={error} />
@@ -47,15 +50,16 @@ class Articles extends Component {
       <div>
         <h1 className="display-4">{pageHeading}</h1>
         <p>{articles.length} articles</p>
+        <ArticleSort changeSort={this.changeSort}
+          sortCriteria={sortCriteria} />
         <CardColumns>
           {
             articles.map(article => {
               return (
                 <Card key={article._id}
                   className="text-center">
-                  {/* Random image used here as none stored in database */}
                   <CardImg top width="100%"
-                    src={utils.randomImageUrl(500, 300)} alt="Article Leader" />
+                    src={article.imageUrl} alt="Article Leader" />
                   <CardHeader>
                     {utils.formatDate(article.created_at)}
                   </CardHeader>
@@ -93,6 +97,12 @@ class Articles extends Component {
     this.getArticles();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.topic !== this.props.match.params.topic) {
+      this.getArticles();
+    }
+  }
+
   async getArticles() {
     const { topic } = this.props.match.params;
     const {
@@ -104,15 +114,39 @@ class Articles extends Component {
 
     if (error) return this.setState({ error });
 
-    articles.sort((b, a) => a.created_at.localeCompare(b.created_at));
+    this.setState({
+      articles: this.sortArticles(articles)
+    });
+  }
 
-    this.setState({ articles });
+  sortArticles = (articles, sortCriteria) => {
+    sortCriteria = (sortCriteria)
+      ? sortCriteria
+      : this.state.sortCriteria;
+
+    if (sortCriteria === 'created_at') {
+      articles.sort((a, b) => b[sortCriteria].localeCompare(a[sortCriteria]));
+    } else {
+      articles.sort((a, b) => b[sortCriteria] - a[sortCriteria]);
+    }
+
+    return articles;
+  }
+
+  changeSort = (sortCriteria) => {
+    const articles = this.sortArticles([...this.state.articles], sortCriteria);
+    this.setState({
+      articles,
+      sortCriteria
+    });
   }
 
   getTopicTitle = (slug) => {
     const { topics } = this.props;
     const currentTopic = topics.find((topic) => topic.slug === slug);
-    const topicTitle = currentTopic ? currentTopic.title : 'Not Found';
+    const topicTitle = currentTopic
+      ? currentTopic.title
+      : 'Not Found';
     return topicTitle;
   }
 
