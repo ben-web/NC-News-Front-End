@@ -83,8 +83,10 @@ class App extends Component {
         <Row>
           <Col>
             <footer>
-              <p><a href="#top">Back to top</a></p>
-              <p><small><a href="https://github.com/ben-web/FE2-NC-News">Github Repository</a></small></p>
+              <p><a href="#top">⬆️</a></p>
+              <p>This React App is a student project demo created whilst studying the Full Stack Developer Course at <a href="https://northcoders.com/">Northcoders</a></p>
+              <p><a href="https://github.com/ben-web/FE2-NC-News">Github Repository</a></p>
+              <p><small>Created by Ben Web</small></p>
             </footer>
           </Col>
         </Row>

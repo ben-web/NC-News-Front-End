@@ -39,7 +39,10 @@ class NewArticle extends Component {
       </Alert>
     )
 
-    const { currentUser, topics } = this.props;
+    const {
+      currentUser,
+      topics
+    } = this.props;
 
     if (!currentUser) return <Redirect to='/' />
     if (article) return <Redirect to={`/article/${article._id}`} />
@@ -51,11 +54,14 @@ class NewArticle extends Component {
         <h1>Post New Article</h1>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label for="title">Title</Label>
+            <Label for="title">
+              Title
+            </Label>
             <Input type="text"
               name="title"
               onChange={this.handleInput}
               value={title}
+              autoFocus
               required
               disabled={submitting} />
             <FormText>
@@ -77,7 +83,9 @@ class NewArticle extends Component {
             </Input>
           </FormGroup>
           <FormGroup>
-            <Label for="body">Your article</Label>
+            <Label for="body">
+              Your article
+            </Label>
             <Input type="textarea"
               name="body"
               onChange={this.handleInput}
@@ -86,7 +94,7 @@ class NewArticle extends Component {
               disabled={submitting} />
             <FormText>
               Please check your spelling before submitting
-              </FormText>
+            </FormText>
           </FormGroup>
           <Button color="primary" disabled={submitting}>{submitText}</Button>
         </Form>
