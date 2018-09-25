@@ -49,7 +49,7 @@ class Articles extends Component {
     return (
       <div>
         <h1 className="display-4">{pageHeading}</h1>
-        <p>{articles.length} articles</p>
+        <h2 className="display-5 text-muted">{articles.length} articles</h2>
         <ArticleSort changeSort={this.changeSort}
           sortCriteria={sortCriteria} />
         <CardColumns>
