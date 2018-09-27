@@ -12,11 +12,11 @@ This project aims to demonstrates some of the skills I've learnt in three weeks 
 * Optimistic Rendering
 * Error Handling
 
-This front end application interacts with the back end RESTful API I created during week six of the course. Details of the API may be found on Github: [github.com/ben-web/BE2-northcoders-news](https://github.com/ben-web/BE2-northcoders-news).
+This front end application interacts with the back end RESTful API I created during week six of the course. Details of the API may be found on Github: [github.com/ben-web/NC-News-Back-End](https://github.com/ben-web/NC-News-Back-End).
 
 ## Using NC News
 
-A working example of this NC News demo is published at [ben-web-nc-news-fe.herokuapp.com](https://ben-web-nc-news-fe.herokuapp.com/).
+A working example of this NC News demo is published at [ben-web-nc-news.herokuapp.com](https://ben-web-nc-news.herokuapp.com).
 
 Heroku free hosting can be a little slow to start so please allow for this when starting the application.
 
