@@ -24,7 +24,7 @@ class App extends Component {
     } = this.state;
 
     if (error) return <ErrorMessage error={error} />
-    if (!currentUser || !topics) return <p>Loading...</p>
+    if (!topics) return <p>Loading...</p>
 
     return (
       <Container>
