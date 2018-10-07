@@ -9,7 +9,8 @@ import Votes from './Votes';
 const Comment = ({
   comment,
   currentUser,
-  removeComment }) => {
+  removeComment
+}) => {
   return (
     <Media tag="li" className="my-3 pt-3 border-top border-light">
       <Media left top >
@@ -19,12 +20,12 @@ const Comment = ({
       <Media body>
         <Media heading>
           {comment.created_by.name}
-          <small className="float-right text-muted font-italic">
+          <small className="d-block float-md-right text-muted font-italic">
             {utils.formatDate(comment.created_at)}
           </small>
         </Media>
         {comment.body}
-        <div className="d-block my-2 float-right">
+        <div className="d-block my-2 float-md-right">
           {comment && currentUser &&
             <DeleteComment comment={comment}
               currentUser={currentUser}
