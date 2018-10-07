@@ -2,9 +2,9 @@
 
 ## Front End React App
 
-NC News is a news aggregation client demo built in React.js by myself during week nine of the Northcoders' Full Stack Developer Course.
+NC News is a news aggregation client demo I built in React.js during week nine of the Northcoders' Full Stack Developer Course.
 
-This project aims to demonstrates some of the skills I've learnt in three weeks of front end study, mostly dedicated to React subjects including:
+This project aims to demonstrate some of the skills I've learnt in three weeks of front end study, mostly dedicated to React subjects including:
 
 * React DOM
 * React Lifecycle
@@ -22,7 +22,7 @@ Heroku free hosting can be a little slow to start so please allow for this when 
 
 ### Functionality
 
-For demonstration purposes, you will be signed into the application as user *Jess Jelly.* Should you wish to view any page as an annonymous user, select the *Sign Out* navigation item.
+For demonstration purposes, you will be signed into the application as user *Jess Jelly.* Should you wish to view any page as an anonymous user, select the *Sign Out* navigation item.
 
 #### Home and Topic Routes
 
@@ -49,7 +49,7 @@ The article component requests and displays an article based on the supplied rou
   * vote and comment counts
 * comments associated with the article
 
-Authorised users may: 
+Authorised users may:
 
 * vote the article up or down
 * vote comments up or down
@@ -58,34 +58,25 @@ Authorised users may:
 
 #### New Article Page
 
-This component allows an authorised user to publish a new article. 
+This component allows an authorised user to publish a new article.
 
 After submitting, the user is redirected to the published article.
 
 #### Errors
 
-==Bad route erros will results in the relevant 400/404 page==
+Bad route errors will results in the relevant 400/404 page.
+
+Avatar images are hosted externally and some URLs are out of date. The Avatar component included an onError event handle that will replace missing images with a default avatar.
 
 ## Installing a Local Copy
 
-These instructions will help you to get a copy of NC News up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-Before installing this project, ensure you have this software installed:
-
-* [Node.js](https://nodejs.org/en/download/)
-* A code editor such as [VS Code](https://code.visualstudio.com/download) or [Atom](https://flight-manual.atom.io/getting-started/sections/installing-atom/)
+These instructions will help you to get a copy of NC News up and running on your local machine for testing purposes.
 
 ### Installing
 
-Duplicate or fork this repository from ~~[github.com/ben-web/FE2-NC-News](https://github.com/ben-web/FE2-NC-News)~~.
+Please ensure you have [Node.js](https://nodejs.org/en/download/) installed.
 
-In your CLI, run the commands:
-
-```bash
-git clone <GIT_REPO_URL>
-```
+Duplicate or fork this repository from [github.com/ben-web/NC-News-Front-End](https://github.com/ben-web/NC-News-Front-End).
 
 Inside this new directory, install the required NPM packages:
 
@@ -101,7 +92,7 @@ To start the application, run this command in the CLI:
 npm run start
 ```
 
-If successful, your browser should open at [http://localhost:3000](http://localhost:3000).
+If successful, your browser should open [http://localhost:3000](http://localhost:3000).
 
 ## Built With
 
@@ -113,9 +104,3 @@ If successful, your browser should open at [http://localhost:3000](http://localh
 ## Author
 
 * **Ben Web** - *Northcoders Student* - [northcoders.com](https://northcoders.com)
-
-## Acknowledgments
-
-* Northcoders
-* Google
-* Stack Overflow

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import {
+  Button,
   Card,
   CardBody,
   CardColumns,
   CardFooter,
   CardHeader,
   CardImg,
-  CardLink,
   CardSubtitle,
   CardText,
   CardTitle,
@@ -16,8 +16,8 @@ import {
 import * as api from '../api';
 import * as utils from '../utils';
 import ArticleMeta from './ArticleMeta';
-import ErrorMessage from './ErrorMessage';
 import ArticleSort from './ArticleSort';
+import ErrorMessage from './ErrorMessage';
 
 class Articles extends Component {
 
@@ -76,9 +76,10 @@ class Articles extends Component {
                     <CardText>
                       {article.body.split(' ').splice(0, 34).join(' ')}&hellip;
                     </CardText>
-                    <CardLink tag={Link} to={`/article/${article._id}`}>
+                    <Button outline color="primary"
+                      tag={Link} to={`/article/${article._id}`}>
                       Read More
-                    </CardLink>
+                    </Button>
                   </CardBody>
                   <CardFooter>
                     <ArticleMeta article={article}

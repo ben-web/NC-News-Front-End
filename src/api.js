@@ -8,7 +8,7 @@ const addErrorHandler = (func) => {
       .catch(({ response }) => {
         const error = {
           errorCode: (response) ? response.status : 999,
-          errorMessage: (response) ? response.data.message : 'No Response / Network Error'
+          errorMessage: (response) ? response.data.message : 'Network Error - You are offline'
         };
         return { error };
       })
@@ -45,9 +45,16 @@ export const fetchCommentsByArticleId =
 
 export const fetchTopics =
   addErrorHandler(
-    (articleId) => axios
+    () => axios
       .get(`${DB_URL}/topics`)
       .then(({ data: { topics } }) => ({ topics }))
+  );
+
+export const fetchUser =
+  addErrorHandler(
+    userName => axios
+      .get(`${DB_URL}/users/${userName}`)
+      .then(({ data: { user } }) => ({ user }))
   );
 
 export const deleteComment =

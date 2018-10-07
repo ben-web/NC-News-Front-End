@@ -36,7 +36,7 @@ class Article extends Component {
           width="100%" />
         <h2 className="display-5 text-muted">
           {article.created_by.name}
-          <span className="d-block float-right font-italic">
+          <span className="d-block float-md-right font-italic">
             {utils.formatDate(article.created_at)}
           </span>
         </h2>

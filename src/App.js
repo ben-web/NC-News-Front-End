@@ -11,12 +11,7 @@ import NewArticle from './components/NewArticle';
 class App extends Component {
 
   state = {
-    currentUser: {
-      _id: '5baa4bc5230b356e3de0b843',
-      username: "jessjelly",
-      name: "Jess Jelly",
-      avatar_url: "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg"
-    },
+    currentUser: null,
     error: null,
     topics: null
   };
@@ -85,7 +80,7 @@ class App extends Component {
             <footer>
               <p><a href="#top"><span role="img" aria-label="Back to top of page">⬆️</span></a></p>
               <p>This React App is a student project demo created whilst studying the Full Stack Developer Course at <a href="https://northcoders.com/">Northcoders</a></p>
-              <p><a href="https://github.com/ben-web/FE2-NC-News">Github Repository</a></p>
+              <p><a href="https://github.com/ben-web/NC-News-Front-End">Github Repository</a></p>
               <p><small>Created by Ben Web</small></p>
             </footer>
           </Col>
@@ -95,11 +90,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getUser();
     this.getTopics();
   }
 
+  async getUser() {
+    const { user, error } = await api.fetchUser('jessjelly');
+    if (error) return this.setState({ error });
+    this.setState({
+      currentUser: user
+    });
+  }
+
   async getTopics() {
-    const { topics, error } = await api.fetchTopics()
+    const { topics, error } = await api.fetchTopics();
     if (error) return this.setState({ error });
     this.setState({ topics });
   }
@@ -107,7 +111,7 @@ class App extends Component {
   signOut = () => {
     this.setState({
       currentUser: null
-    })
+    });
   }
 
 }

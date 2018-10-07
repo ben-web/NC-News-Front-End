@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import {
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
   NavItem,
   NavLink,
   UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from 'reactstrap';
 
 const NavUser = ({ currentUser, signOut }) => {
@@ -26,7 +26,8 @@ const NavUser = ({ currentUser, signOut }) => {
           New Article
         </DropdownItem>
         <DropdownItem divider />
-        <DropdownItem onClick={() => signOut()}>
+        <DropdownItem tag={Link} to="/"
+          onClick={() => signOut()}>
           Sign Out
         </DropdownItem>
       </DropdownMenu>
