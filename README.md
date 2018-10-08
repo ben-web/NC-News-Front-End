@@ -16,7 +16,7 @@ This front end application interacts with the back end RESTful API I created dur
 
 ## Using NC News
 
-A working example of this NC News demo is published at [ben-web-nc-news.herokuapp.com](https://ben-web-nc-news.herokuapp.com).
+A working example of this demo is published at [ben-web-nc-news.herokuapp.com](https://ben-web-nc-news.herokuapp.com).
 
 Heroku free hosting can be a little slow to start so please allow for this when starting the application.
 
@@ -38,7 +38,7 @@ The home and topic pages use the same Articles component to display a summary of
 
 #### Individual Article Routes
 
-The article component requests and displays an article based on the supplied route. It displays:
+The Article component requests and displays an article based on the supplied route. It displays:
 
 * the full article
 * associated meta data:
@@ -64,9 +64,11 @@ After submitting, the user is redirected to the published article.
 
 #### Errors
 
-Bad route errors will results in the relevant 400/404 page.
+Bad route errors result in the relevant 400/404 page.
 
-Avatar images are hosted externally and some URLs are out of date. The Avatar component included an onError event handle that will replace missing images with a default avatar.
+API errors result in the API error status code and message being displayed to the user.
+
+Avatar images are hosted externally and some URLs are out of date. The Avatar component includes an onError event handler that will replace missing images with a default avatar.
 
 ## Installing a Local Copy
 
