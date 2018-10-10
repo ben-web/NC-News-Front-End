@@ -59,7 +59,7 @@ class Articles extends Component {
                 <Card key={article._id}
                   className="text-center">
                   <CardImg top width="100%"
-                    src={article.imageUrl} alt="Article Leader" />
+                    src={article.image_url} alt="Article Leader" />
                   <CardHeader>
                     {utils.formatDate(article.created_at)}
                   </CardHeader>
