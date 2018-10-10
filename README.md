@@ -2,7 +2,7 @@
 
 ## Front End React App
 
-NC News is a news aggregation client demo I built in React.js during week nine of the Northcoders' Full Stack Developer Course.
+NC News is a news aggregation client demo I built in React.js during week nine of the [Northcoders' Full Stack Developer Course](https://northcoders.com/developer-pathway).
 
 This project aims to demonstrate some of the skills I've learnt in three weeks of front end study, mostly dedicated to React subjects including:
 
