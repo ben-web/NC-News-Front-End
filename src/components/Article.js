@@ -31,7 +31,7 @@ class Article extends Component {
       <div>
         <h1 className="display-4">{article.title}</h1>
         <img className="article-image"
-          src={article.imageUrl}
+          src={article.image_url}
           alt={article.title}
           width="100%" />
         <h2 className="display-5 text-muted">
